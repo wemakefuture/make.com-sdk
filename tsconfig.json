@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "module": "commonjs", // instead of commonjs
+    "target": "es6",
+    "outDir": "dist",
+    "rootDir": "src",
+    "sourceMap": true,
+    "strict": true,
+    "allowJs": true, // as the integromat code is only in js and converting it is a pain in the ass
+    "noImplicitAny": true, // set to true again
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "strictPropertyInitialization": false // added this for the compute-bmi
+  },
+  "exclude": [
+    "node_modules",
+    "dist"
+  ],
+  "include": ["src/**/*.ts"],
+}
