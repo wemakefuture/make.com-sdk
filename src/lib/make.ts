@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import axios, { Axios, AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import * as scenarios from './scenarios';
 import * as folders from './folders';
 import * as queryStringLib from 'query-string';
@@ -11,7 +11,7 @@ interface MakeConfig {
 }
 // see https://www.make.com/en/api-documentation/pagination-sorting-filtering
 export interface BaseMakeRequestParams {
-  'cols[]'?: any;
+  'cols[]'?: unknown;
   'pg[sortBy]'?: string;
   'pg[offset]'?: number;
   'pg[sortDir]'?: 'asc' | 'desc';
@@ -21,11 +21,11 @@ export interface MakeRequestConfig {
   method: 'get' | 'GET' | 'delete' | 'DELETE' | 'post' | 'POST' | 'put' | 'PUT' | 'patch' | 'PATCH';
   path: string;
   queryStringObject?: Record<string, unknown>;
-  body?: any;
+  body?: unknown;
   subContentKeys?: string[];
 }
 
-class Make {
+export class Make {
   loaded: boolean;
   utils: Record<string, unknown>;
   config: MakeConfig;
@@ -188,6 +188,7 @@ class Make {
       console.error(JSON.stringify(error.response.data));
     }
   }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   getSubContent(response: AxiosResponse, subContent?: string[]): any {
     if (typeof subContent === 'undefined') {
       return response.data;
@@ -198,6 +199,7 @@ class Make {
     }
     return output;
   }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   getData(response: AxiosResponse | void): any {
     if (typeof response === 'undefined') {
       return;

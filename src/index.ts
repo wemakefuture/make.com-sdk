@@ -1,2 +1,1 @@
-export * from './blueprint';
-export * from './makeSDK/make';
+export { Make } from './lib/make';

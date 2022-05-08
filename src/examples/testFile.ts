@@ -1,5 +1,6 @@
-import Make from '../make';
-import credentials from '../../credentials';
+/* eslint-disable @typescript-eslint/naming-convention */
+import Make from '../lib/make';
+import credentials from '../credentials';
 
 if (typeof require !== 'undefined' && require.main === module) {
   (async () => {
@@ -9,7 +10,7 @@ if (typeof require !== 'undefined' && require.main === module) {
       organizationId: 181,
     });
 
-    console.log(JSON.stringify(await make.listScenarios({ organizationId: 181, 'pg[limit]': 2 })));
+    console.log(JSON.stringify(await make.listScenarios({ organizationId: 181, 'pg[limit]': 2 }), null, 4));
 
     const test = await make.listScenarios({ organizationId: 181, 'pg[limit]': 2 });
     console.log('last edit', test.scenarios[0].lastEdit);
