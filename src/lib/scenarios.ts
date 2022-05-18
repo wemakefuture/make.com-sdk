@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { BaseMakeRequestParams, MakeRequestConfig } from './make';
+import Make, { BaseMakeRequestParams, MakeRequestConfig } from './make';
 
 export interface ListScenariosParams extends BaseMakeRequestParams {
   organizationId: number;
@@ -57,6 +57,251 @@ export function listScenarios(params: ListScenariosParams): MakeRequestConfig {
 }
 
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+export interface GetScenarioDetailsParams {
+  organizationId: number;
+  scenarioId: number;
+  folderId: number;
+  islinked: boolean;
+
+}
+
+export interface GetScenarioDetailsOutput {
+  scenario: Scenario;
+}
+
+export interface Scheduling {
+  type:     string;
+  interval: number;
+}
+
+export function getScenarioDetails(params: GetScenarioDetailsParams): MakeRequestConfig {
+  const requestConfig: MakeRequestConfig = {
+    method: 'get',
+    path: `/scenarios/${params.scenarioId}`,
+    queryStringObject: { ...params }
+  };
+  return requestConfig;
+}
+
+export interface GetScenarioTriggerParams {
+  blueprintId: number;
+  scenarioId: number;
+} 
+export interface GetScenarioTriggerOutput {
+  id:         number;
+  name:       string;
+  udid:       string;
+  scope:      string;
+  queueCount: number;
+  queueLimit: number;
+  typeName:   string;
+  type:       string;
+  url:        string;
+}
+
+export function getScenarioTrigger(params:GetScenarioTriggerParams):MakeRequestConfig {
+  const requestConfig: MakeRequestConfig = {
+    method: 'get',
+    path: `/scenarios/${params.scenarioId}/triggers`,
+    queryStringObject: { ...params }
+  };
+  return requestConfig;
+}
+
+export interface ListScenarioBlueprintsParams extends BaseMakeRequestParams {
+  scenarioId: number;
+}
+
+export interface ListScenarioBlueprintsOutput {
+  scenariosBlueprints: ScenariosBlueprint[];
+}
+
+export interface ScenariosBlueprint {
+  created:    Date;
+  version:    number;
+  scenarioId: number;
+}
+
+export function listScenarioBlueprints(params:ListScenarioBlueprintsParams): MakeRequestConfig {
+  const requestConfig: MakeRequestConfig = {
+    method: 'get',
+    path: `/scenarios/${params.scenarioId}/blueprints`,
+    queryStringObject: { ...params }
+  };
+  return requestConfig;
+}
+
+export interface ListScenarioLogsParams extends BaseMakeRequestParams{
+  scenarioId: number;
+  from: number;
+  to: number;
+  status: number;
+  'pg[last]'?: boolean;
+  'pg[showLast]'?: string;
+  showCheckRuns: boolean
+}
+export interface ListScenarioLogsOutput {
+  scenarioLogs: ScenarioLog[];
+  pg:           PG;
+}
+
+export interface PG {
+  sortBy:  string;
+  sortDir: string;
+  limit:   number;
+  offset:  number;
+}
+
+export interface ScenarioLog {
+  imtId:       string;
+  id:          number | string;
+  detail?:     Detail;
+  authorId:    number | null;
+  type:        string;
+  timestamp:   Date;
+  duration?:   number;
+  operations?: number;
+  transfer?:   number;
+  teamId?:     number;
+  instant?:    boolean;
+  status?:     number;
+}
+
+export interface Detail {
+  author: Author;
+}
+
+export interface Author {
+  name:  string;
+  staff: boolean;
+}
+
+export function listScenarioLogs(params: ListScenarioLogsParams): MakeRequestConfig {
+  const requestConfig: MakeRequestConfig = {
+    method: 'get',
+    path: `/scenarios/${params.scenarioId}/logs`,
+    queryStringObject: { ...params }
+  };
+  return requestConfig;
+}
+
+export interface GetScenarioExecutionLogParams {
+  scenarioId: number;
+  executionId: number;
+}
+
+export interface GetScenarioExecutionLogOutput {
+  scenarioLog: ScenarioLog;
+}
+
+export interface ScenarioLog {
+  organizationId: number;
+  "@kindId":      number;
+}
+
+export function getScenarioExecutionLog(params:GetScenarioExecutionLogParams): MakeRequestConfig {
+  const requestConfig: MakeRequestConfig = {
+    method: 'get',
+    path: `/scenarios/${params.scenarioId}/logs/${params.executionId}`
+  };
+  return requestConfig;
+}
+
+export interface UpdateScenarioParams {
+  scenarioId: number;
+  folderId: number;
+  blueprint: string;
+  name: Date;
+  scheduling: string;
+  concept: boolean
+}
+
+export interface UpdateScenarioOutput {
+  scenario: Scenario;
+}
+
+export function updateScenario(params:UpdateScenarioParams): MakeRequestConfig {
+  const requestConfig: MakeRequestConfig = {
+    method: 'patch',
+    path: `/scenarios/${params.scenarioId}`,
+    body: params
+  };
+  return requestConfig;
+}
+
+export interface CreateScenarioParams {
+  blueprint: string;
+  teamId: number;
+  scheduling: string;
+  concept: boolean;
+  folderId: null;
+  basedon: number;
+}
+export interface CreateScenarioOutput {
+  scenario: Scenario;
+}
+
+export function createScenario(params:CreateScenarioParams): MakeRequestConfig {
+  const requestConfig: MakeRequestConfig = {
+    method: 'post',
+    path: '/scenarios',
+    body: params
+  };
+  return requestConfig;
+}
+
+export interface StartScenarioParams {
+  scenarioId: number
+}
+
+export interface StartScenarioOutput {
+  scenario: Scenario;
+}
+
+export function startScenario(params: StartScenarioParams): MakeRequestConfig {
+  const requestConfig: MakeRequestConfig = {
+    method: 'post',
+    path: `/scenarios/${params.scenarioId}/start`
+  };
+  return requestConfig;
+}
+
+export interface StopScenarioParams {
+  scenarioId: number
+}
+
+export interface StopScenarioOutput {
+  scenario: Scenario;
+}
+
+export function stopScenario(params: StopScenarioParams): MakeRequestConfig {
+  const requestConfig: MakeRequestConfig = {
+    method: 'post',
+    path: `/scenarios/${params.scenarioId}/stop`,
+    queryStringObject: { ...params }
+  };
+  return requestConfig;
+}
+
+export interface CloneScenarioParams {
+  organizationId: number;
+  notAnalyze: boolean;
+  scenarioId: number;
+}
+
+export interface CloneScenarioOutput {
+  scenario: Scenario;
+}
+
+export function cloneScenario(params: CloneScenarioParams): MakeRequestConfig {
+  const requestConfig: MakeRequestConfig = {
+    method: 'post',
+    path: `/scenarios/${params.scenarioId}/clone`,
+    queryStringObject: { ...params }
+  };
+  return requestConfig;
+}
 
 export interface GetScenarioBlueprintParams {
   scenarioId: number;
