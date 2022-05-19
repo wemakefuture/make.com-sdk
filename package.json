@@ -1,8 +1,9 @@
 {
   "name": "asm-make-sdk",
-  "version": "1.0.0",
+  "version": "1.0.13",
   "description": "",
-  "main": "src/index.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "devDependencies": {
     "@jest/types": "^27.4.2",
     "@types/lodash": "^4.14.181",
@@ -36,6 +37,9 @@
     "coverage": "jest --coverage",
     "start-azurite": "azurite --silent --location azureStorage --debug azureStorage/debug.log"
   },
+  "files": [
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "git@ssh.dev.azure.com:v3/0x21/ASM/asm-make-sdk"
