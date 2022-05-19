@@ -10,6 +10,7 @@
     "noImplicitAny": true, // set to true again
     "esModuleInterop": true,
     "resolveJsonModule": true,
+    "declaration": true,
     "strictPropertyInitialization": false // added this for the compute-bmi
   },
   "exclude": [
