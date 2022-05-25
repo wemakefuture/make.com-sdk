@@ -165,7 +165,7 @@ export class Make {
   async listFolders(params: folders.ListFoldersParams): Promise<folders.ListFoldersOutput> {
     return await axios(this.generateAxiosRequest(folders.listFolders(params)))
       .catch(this.handleErrors)
-      .then(this.getData); 
+      .then(this.getData);
   }
 
   // ---------------------------- Helper functions --------------------------------------------

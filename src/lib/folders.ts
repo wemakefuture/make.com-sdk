@@ -42,8 +42,9 @@ export function deleteFolder(params: DeleteFolderParams): MakeRequestConfig {
   return requestConfig;
 }
 
-export interface UpdateFolderParams extends ScenarioFolder{
+export interface UpdateFolderParams {
   scenarioFolderId: number;
+  name: string;
 }
 
 export interface UpdateFolderOutput {
@@ -54,7 +55,7 @@ export function updateFolder(params: UpdateFolderParams): MakeRequestConfig {
   const requestConfig: MakeRequestConfig = {
     method: 'patch',
     path: `/scenarios-folders/${params.scenarioFolderId}`,
-    body: { ...params }
+    body: params,
   };
   return requestConfig;
 }
@@ -67,8 +68,8 @@ export interface ListFoldersOutput {
 }
 
 export interface ScenariosFolder {
-  id:             number;
-  name:           string;
+  id: number;
+  name: string;
   scenariosTotal: number;
 }
 
@@ -76,7 +77,7 @@ export function listFolders(params: ListFoldersParams): MakeRequestConfig {
   const requestConfig: MakeRequestConfig = {
     method: 'get',
     path: '/scenarios-folders',
-    queryStringObject: { ...params }
+    queryStringObject: { ...params },
   };
   return requestConfig;
 }
