@@ -16,5 +16,7 @@ if (typeof require !== 'undefined' && require.main === module) {
     console.log('last edit', test.scenarios[0].lastEdit);
 
     // console.log(await make.createFolder({ teamId: 2313, name: 'Soooome folder' }));
+
+    //  const testGetScenarioDetails = await make.getScenarioDetails({})
   })();
 }

@@ -25,3 +25,59 @@ export function createFolder(params: CreateFolderParams): MakeRequestConfig {
   };
   return requestConfig;
 }
+
+export interface DeleteFolderParams {
+  folderId: number;
+}
+
+export interface DeleteFolderOutput {
+  scenarioFolder: number;
+}
+
+export function deleteFolder(params: DeleteFolderParams): MakeRequestConfig {
+  const requestConfig: MakeRequestConfig = {
+    method: 'delete',
+    path: `/scenarios-folders/${params.folderId}`,
+  };
+  return requestConfig;
+}
+
+export interface UpdateFolderParams {
+  scenarioFolderId: number;
+  name: string;
+}
+
+export interface UpdateFolderOutput {
+  scenarioFolder: ScenarioFolder;
+}
+
+export function updateFolder(params: UpdateFolderParams): MakeRequestConfig {
+  const requestConfig: MakeRequestConfig = {
+    method: 'patch',
+    path: `/scenarios-folders/${params.scenarioFolderId}`,
+    body: params,
+  };
+  return requestConfig;
+}
+
+export interface ListFoldersParams {
+  teamId: number;
+}
+export interface ListFoldersOutput {
+  scenariosFolders: ScenariosFolder[];
+}
+
+export interface ScenariosFolder {
+  id: number;
+  name: string;
+  scenariosTotal: number;
+}
+
+export function listFolders(params: ListFoldersParams): MakeRequestConfig {
+  const requestConfig: MakeRequestConfig = {
+    method: 'get',
+    path: '/scenarios-folders',
+    queryStringObject: { ...params },
+  };
+  return requestConfig;
+}
