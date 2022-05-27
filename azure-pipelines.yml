@@ -10,17 +10,20 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- task: npmAuthenticate@0
-  inputs:
-    workingFile: .npmrc
-- script: npm ci
-- task: NodeTool@0
-  inputs:
-    versionSpec: '16.x'
-  displayName: 'Install Node.js'
+  - task: npmAuthenticate@0
+    displayName: 'Authenticate with azure artifacts npm feed'
+    inputs:
+      workingFile: .npmrc
+  - script: npm ci
+    displayName: 'Install dependencies'
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '16.x'
+    displayName: 'Install Node.js'
 
-- script: |
-    npm install
-    npm run build
-    npm publish
-  displayName: 'npm install and build'
+# - script: |
+#      npm install
+ #     npm run build
+  #  displayName: 'npm install and build'
+  - script: npm publish
+    displayName: 'Publish code to azure artifacts npm feed'
