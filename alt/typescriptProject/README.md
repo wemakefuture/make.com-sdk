@@ -1,3 +1,0 @@
-# aservement
-
-Automation Service Management
