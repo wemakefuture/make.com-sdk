@@ -328,146 +328,28 @@ export interface Response {
 }
 
 export interface BlueprintType {
+  name?: string;
   flow: Module[];
-  name: string;
-  metadata: BlueprintTypeMetadata;
+  metadata?: BlueprintTypeMetadata;
 }
 
 export interface Module {
   id: number;
-  mapper: ModuleMapper;
+  mapper: any;
   module: string;
-  onerror?: Onerror[];
+  onerror?: Module[];
   version: number;
-  metadata: ModuleMetadata;
-  parameters: ModuleParameters;
-  routes: BlueprintType[]; // if Router
-}
-
-export interface ModuleMapper {
-  ca: string;
-  qs: any[];
-  url: string;
-  gzip: boolean;
-  method: string;
-  headers: any[];
-  timeout: string;
-  authPass: string;
-  authUser: string;
-  bodyType: string;
-  shareCookies: boolean;
-  parseResponse: boolean;
-  followRedirect: boolean;
-  useQuerystring: boolean;
-  rejectUnauthorized: boolean;
-}
-
-export interface ModuleMetadata {
-  expect: Expect[];
-  restore: PurpleRestore;
-  designer: PurpleDesigner;
-  parameters: Parameter[];
-}
-
-export interface PurpleDesigner {
-  x: number;
-  y: number;
-}
-
-export interface Expect {
-  name: string;
-  type: string;
-  label: string;
-  required?: boolean;
-  validate?: Validate;
-  spec?: Parameter[];
-  labels?: Labels;
-  multiline?: boolean;
-}
-
-export interface Labels {
-  add: string;
-  edit: string;
-}
-
-export interface Parameter {
-  name: string;
-  type: string;
-  label: string;
-  required?: boolean;
-}
-
-export interface Validate {
-  enum?: string[];
-  max?: number;
-  min?: number;
-}
-
-export interface PurpleRestore {
-  qs: Headers;
-  method: Method;
-  headers: Headers;
-  bodyType: BodyType;
-}
-
-export interface BodyType {
-  label: string;
-}
-
-export interface Headers {
-  mode: string;
-  items: any[];
-}
-
-export interface Method {
-  mode: string;
-  label: string;
-}
-
-export interface Onerror {
-  id: number;
-  mapper: OnerrorMapper;
-  module: string;
-  version: number;
-  metadata: OnerrorMetadata;
-  parameters: OnerrorParameters;
-}
-
-export interface OnerrorMapper {
-  count: string;
-  retry: boolean;
-  interval: string;
-}
-
-export interface OnerrorMetadata {
-  expect: Parameter[];
-  restore: FluffyRestore;
-  designer: PurpleDesigner;
-}
-
-export interface FluffyRestore {
-  retry: Retry;
-}
-
-export interface Retry {
-  mode: string;
-}
-
-export interface OnerrorParameters {
-  name: string;
-  type: string;
-  label: string;
-  required: boolean;
-}
-
-export interface ModuleParameters {
-  handleErrors: boolean;
+  metadata: any;
+  parameters?: any;
+  routes?: BlueprintType[]; // if Router
 }
 
 export interface BlueprintTypeMetadata {
+  instant: boolean;
   version: number;
-  designer: FluffyDesigner;
   scenario: Scenario;
+  designer: FluffyDesigner;
+  zone?: string;
 }
 
 export interface FluffyDesigner {
@@ -475,14 +357,21 @@ export interface FluffyDesigner {
 }
 
 export interface Scenario {
-  dlq: boolean;
-  dataloss: boolean;
+  roundtrips: number;
   maxErrors: number;
   autoCommit: boolean;
-  roundtrips: number;
+  autoCommitTriggerLast: boolean;
   sequential: boolean;
   confidential: boolean;
-  autoCommitTriggerLast: boolean;
+  dataloss: boolean;
+  dlq: boolean;
+}
+
+interface ErrorHandlerParams {
+  developer: string;
+  connectionId: number;
+  errorCode?: string;
+  level?: number;
 }
 
 export function getScenarioBlueprint(params: GetScenarioBlueprintParams): MakeRequestConfig {
