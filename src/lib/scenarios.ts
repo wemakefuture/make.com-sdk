@@ -209,11 +209,11 @@ export function getScenarioExecutionLog(params: GetScenarioExecutionLogParams): 
 
 export interface UpdateScenarioParams {
   scenarioId: number;
-  folderId: number;
+  folderId?: number;
   blueprint: string;
-  name: string;
-  scheduling: string;
-  concept: boolean;
+  name?: string;
+  scheduling?: string;
+  concept?: boolean;
 }
 
 export interface UpdateScenarioOutput {
@@ -224,7 +224,7 @@ export function updateScenario(params: UpdateScenarioParams): MakeRequestConfig 
   const requestConfig: MakeRequestConfig = {
     method: 'patch',
     path: `/scenarios/${params.scenarioId}`,
-    body: params,
+    body: { blueprint: params.blueprint },
   };
   return requestConfig;
 }
@@ -367,11 +367,21 @@ export interface Scenario {
   dlq: boolean;
 }
 
-interface ErrorHandlerParams {
-  developer: string;
-  connectionId: number;
-  errorCode?: string;
-  level?: number;
+export interface ErrorHandlerParams {
+  developer: { userId: number };
+  connectionId?: number;
+  behaviour?: string;
+  urgency: number;
+  risk: number;
+  department?: string;
+  webHookUrl?: string;
+  launch?: {
+    overwriteErrorHandler?: boolean;
+    enableModule?: boolean;
+    emailNotification?: boolean;
+  };
+  creationDate?: Date;
+  lastEdit?: Date;
 }
 
 export function getScenarioBlueprint(params: GetScenarioBlueprintParams): MakeRequestConfig {
