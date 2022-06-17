@@ -368,7 +368,7 @@ export interface Scenario {
 }
 
 export interface ErrorHandlerParams {
-  developer: { userId: number };
+  developer: { userId: string };
   connectionId?: number;
   behaviour?: string;
   urgency: number;
@@ -382,6 +382,7 @@ export interface ErrorHandlerParams {
   };
   creationDate?: Date;
   lastEdit?: Date;
+  message: string;
 }
 
 export function getScenarioBlueprint(params: GetScenarioBlueprintParams): MakeRequestConfig {
