@@ -290,7 +290,7 @@ export interface CloneScenarioParams {
   name: string;
   teamId: number;
   states: boolean;
-  account: Record<string, unknown>;
+  account?: Record<string, unknown>;
 }
 
 export interface CloneScenarioOutput {
@@ -302,6 +302,23 @@ export function cloneScenario(params: CloneScenarioParams): MakeRequestConfig {
     method: 'post',
     path: `/scenarios/${params.scenarioId}/clone`,
     queryStringObject: { ...params },
+    body: params,
+  };
+  return requestConfig;
+}
+
+export interface DeleteScenarioParams {
+  scenarioId: number;
+}
+
+export interface DeleteScenarioOutput {
+  scenario: number;
+}
+
+export function deleteScenario(params: DeleteScenarioParams): MakeRequestConfig {
+  const requestConfig: MakeRequestConfig = {
+    method: 'delete',
+    path: `/scenarios/${params.scenarioId}`,
   };
   return requestConfig;
 }

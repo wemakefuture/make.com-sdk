@@ -6,40 +6,49 @@ const make = new Make({
   host: 'eu1.make.com',
   organizationId: 94920,
 });
+//  create update list delete
+
+let hookId: number;
+const formId: string = '221653079490459';
+const IMTCONN: number = 339401;
 
 test('testCreateHook', async () => {
-  const testCreateHook = await make.createHook({
-    name: 'testing hook 1 new',
+  const test = await make.createHook({
+    name: 'testing hook 1',
     teamId: '60004',
-    typeName: 'web',
-    __IMTCONN__: 96,
-    formId: '91282545501352',
+    typeName: 'jotform',
+    __IMTCONN__: IMTCONN,
+    formId: formId,
   });
-  console.log(testCreateHook);
-  expect(testCreateHook['hook']).toBeDefined();
+  //  console.log(test);
+  hookId = test.hook.id;
+  expect(test['hook']).toBeDefined();
 });
 
 test('testListHooks', async () => {
-  const testListHooks = await make.listHooks({ teamId: 60004, typeName: 'gateway-webhook', assigned: true, viewForScenarioId: 279836 });
-  expect(testListHooks['hooks'].length).toBeGreaterThanOrEqual(0);
-});
-
-test('testDeleteHook', async () => {
-  const testDeleteHook = await make.deleteHook({ hookId: 140204, confirmed: true });
-  expect(testDeleteHook['hook']).toEqual(140204);
+  const test = await make.listHooks({ teamId: 60004, typeName: 'gateway-webhook', assigned: true });
+  //  console.log(test);
+  expect(test['hooks'].length).toBeGreaterThanOrEqual(0);
 });
 
 test('testEnableHook', async () => {
-  const testEnableHook = await make.enableHook({ hookId: 137952 });
-  expect(testEnableHook['success']).toEqual(true);
+  const test = await make.enableHook({ hookId: hookId });
+  expect(test['success']).toEqual(true);
 });
 
 test('testDisableHook', async () => {
-  const testDisableHook = await make.disableHook({ hookId: 137952 });
-  expect(testDisableHook['success']).toEqual(true);
+  const test = await make.disableHook({ hookId: hookId });
+  expect(test['success']).toEqual(true);
 });
 
 test('testGetHookDetails', async () => {
-  const testGetHookDetails = await make.getHookDetails({ hookId: 137952 });
-  expect(testGetHookDetails['hook']).toBeDefined();
+  const test = await make.getHookDetails({ hookId: hookId });
+  //  console.log(test);
+  expect(test['hook']).toBeDefined();
+});
+
+test('testDeleteHook', async () => {
+  const test = await make.deleteHook({ hookId: hookId, confirmed: true });
+  //  console.log(test);
+  expect(test['hook']).toEqual(hookId);
 });
