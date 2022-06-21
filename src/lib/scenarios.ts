@@ -368,13 +368,14 @@ export interface Scenario {
 }
 
 export interface ErrorHandlerParams {
-  developer: { userId: string };
+  errorMessage?: string;
+  developer?: { userId?: string };
   connectionId?: number;
-  behaviour?: string;
-  urgency: number;
-  risk: number;
+  urgency?: number;
   department?: string;
+  risk?: number;
   webHookUrl?: string;
+  behaviour?: number;
   launch?: {
     overwriteErrorHandler?: boolean;
     enableModule?: boolean;
@@ -382,7 +383,6 @@ export interface ErrorHandlerParams {
   };
   creationDate?: Date;
   lastEdit?: Date;
-  message: string;
 }
 
 export function getScenarioBlueprint(params: GetScenarioBlueprintParams): MakeRequestConfig {
