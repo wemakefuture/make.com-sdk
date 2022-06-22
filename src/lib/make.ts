@@ -4,6 +4,8 @@ import * as scenarios from './scenarios';
 import * as folders from './folders';
 import * as queryStringLib from 'query-string';
 import * as hooks from './hooks';
+import * as connection from './connections';
+import * as teams from './teams';
 
 interface MakeConfig {
   apiKey: string;
@@ -35,6 +37,8 @@ export class Make {
   }
 
   // ---------------------------- The actual functions --------------------------------------------
+
+  //  Hooks
 
   async createHook(params: hooks.CreateHookParams): Promise<hooks.CreateHookOutput> {
     return await axios(this.generateAxiosRequest(hooks.createHook(params)))
@@ -71,6 +75,8 @@ export class Make {
       .catch(this.handleErrors)
       .then(this.getData);
   }
+
+  // Scenario
 
   async getScenarioDetails(params: scenarios.GetScenarioDetailsParams): Promise<scenarios.GetScenarioDetailsOutput> {
     return await axios(this.generateAxiosRequest(scenarios.getScenarioDetails(params)))
@@ -144,6 +150,8 @@ export class Make {
       .then(this.getData);
   }
 
+  //  Folder
+
   async createFolder(params: folders.CreateFolderParams): Promise<folders.CreateFolderOutput> {
     return await axios(this.generateAxiosRequest(folders.createFolder(params)))
       .catch(this.handleErrors)
@@ -164,6 +172,75 @@ export class Make {
 
   async listFolders(params: folders.ListFoldersParams): Promise<folders.ListFoldersOutput> {
     return await axios(this.generateAxiosRequest(folders.listFolders(params)))
+      .catch(this.handleErrors)
+      .then(this.getData);
+  }
+
+  // Connection
+
+  async createConnection(
+    params: connection.CreateConnectionParams,
+    content: connection.CreateConnectionContent,
+  ): Promise<connection.CreateConnectionOutput> {
+    return await axios(this.generateAxiosRequest(connection.createConnection(params, content)))
+      .catch(this.handleErrors)
+      .then(this.getData);
+  }
+
+  async testConnection(params: connection.TestConnectionParams): Promise<connection.TestConnectionOutput> {
+    return await axios(this.generateAxiosRequest(connection.testConnection(params)))
+      .catch(this.handleErrors)
+      .then(this.getData);
+  }
+
+  async scopedConnection(
+    params: connection.ScopedConnectionParams,
+    content: connection.ScopedConnectionContent,
+  ): Promise<connection.ScopedConnectionOutput> {
+    return await axios(this.generateAxiosRequest(connection.scopedConnection(params, content)))
+      .catch(this.handleErrors)
+      .then(this.getData);
+  }
+
+  async setDataConnection(
+    params: connection.SetDataConnectionParams,
+    content: connection.SetDataConnectionContent,
+  ): Promise<connection.SetDataConnectionOutput> {
+    return await axios(this.generateAxiosRequest(connection.setDataConnection(params, content)))
+      .catch(this.handleErrors)
+      .then(this.getData);
+  }
+
+  async updateConnection(
+    params: connection.UpdateConnectionParams,
+    content: connection.UpdateConnectionContent,
+  ): Promise<connection.UpdateConnectionOutput> {
+    return await axios(this.generateAxiosRequest(connection.updateConnection(params, content)))
+      .catch(this.handleErrors)
+      .then(this.getData);
+  }
+
+  async listConnection(params: connection.ListConnectionParams): Promise<connection.ListConnectionOutput> {
+    return await axios(this.generateAxiosRequest(connection.listConnection(params)))
+      .catch(this.handleErrors)
+      .then(this.getData);
+  }
+
+  async getConnectionDetails(params: connection.GetConnectionDetailsParams): Promise<connection.GetConnectionDetailsOutput> {
+    return await axios(this.generateAxiosRequest(connection.getConnectionDetails(params)))
+      .catch(this.handleErrors)
+      .then(this.getData);
+  }
+
+  async deleteConnection(params: connection.DeleteConnectionParams): Promise<connection.DeleteConnectionOutput> {
+    return await axios(this.generateAxiosRequest(connection.deleteConnection(params)))
+      .catch(this.handleErrors)
+      .then(this.getData);
+  }
+
+  //  Teams
+  async listTeams(params: teams.ListTeamsParams): Promise<teams.ListTeamsOutput> {
+    return await axios(this.generateAxiosRequest(teams.listTeams(params)))
       .catch(this.handleErrors)
       .then(this.getData);
   }
