@@ -73,7 +73,8 @@ test('testStartScenario', async () => {
 });
 
 test('testListScenarioLogs', async () => {
-  const test = await make.listScenarioLogs({ scenarioId: scenarioId });
+  const scenarioLogId = 349543;
+  const test = await make.listScenarioLogs({ scenarioId: scenarioLogId });
   for (let i = 0; i < test.scenarioLogs.length; i++) {
     if (test.scenarioLogs[i]['type'] == 'auto' || test.scenarioLogs[i]['type'] == 'manual') {
       executionId = test.scenarioLogs[i]['id'].toString();
