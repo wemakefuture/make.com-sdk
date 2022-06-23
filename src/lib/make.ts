@@ -36,8 +36,8 @@ export class Make {
 
   // ---------------------------- The actual functions --------------------------------------------
 
-  async createHook(params: hooks.CreateHookParams): Promise<hooks.CreateHookOutput> {
-    return await axios(this.generateAxiosRequest(hooks.createHook(params)))
+  async createHook(params: hooks.CreateHookParams, content: hooks.CreateHookContent): Promise<hooks.CreateHookOutput> {
+    return await axios(this.generateAxiosRequest(hooks.createHook(params, content)))
       .catch(this.handleErrors)
       .then(this.getData);
   }
@@ -114,14 +114,17 @@ export class Make {
       .then(this.getData);
   }
 
-  async updateScenario(params: scenarios.UpdateScenarioParams): Promise<scenarios.UpdateScenarioOutput> {
-    return await axios(this.generateAxiosRequest(scenarios.updateScenario(params)))
+  async updateScenario(
+    params: scenarios.UpdateScenarioParams,
+    content: scenarios.UpdateScenarioContent,
+  ): Promise<scenarios.UpdateScenarioOutput> {
+    return await axios(this.generateAxiosRequest(scenarios.updateScenario(params, content)))
       .catch(this.handleErrors)
       .then(this.getData);
   }
 
-  async createScenario(params: scenarios.CreateScenarioParams): Promise<scenarios.CreateScenarioOutput> {
-    return await axios(this.generateAxiosRequest(scenarios.createScenario(params)))
+  async createScenario(content: scenarios.CreateScenarioContent): Promise<scenarios.CreateScenarioOutput> {
+    return await axios(this.generateAxiosRequest(scenarios.createScenario(content)))
       .catch(this.handleErrors)
       .then(this.getData);
   }
@@ -138,14 +141,23 @@ export class Make {
       .then(this.getData);
   }
 
-  async cloneScenario(params: scenarios.CloneScenarioParams): Promise<scenarios.CloneScenarioOutput> {
-    return await axios(this.generateAxiosRequest(scenarios.cloneScenario(params)))
+  async cloneScenario(
+    params: scenarios.CloneScenarioParams,
+    content: scenarios.CloneScenarioContent,
+  ): Promise<scenarios.CloneScenarioOutput> {
+    return await axios(this.generateAxiosRequest(scenarios.cloneScenario(params, content)))
       .catch(this.handleErrors)
       .then(this.getData);
   }
 
-  async createFolder(params: folders.CreateFolderParams): Promise<folders.CreateFolderOutput> {
-    return await axios(this.generateAxiosRequest(folders.createFolder(params)))
+  async deleteScenario(params: scenarios.DeleteScenarioParams): Promise<scenarios.DeleteScenarioOutput> {
+    return await axios(this.generateAxiosRequest(scenarios.deleteScenario(params)))
+      .catch(this.handleErrors)
+      .then(this.getData);
+  }
+
+  async createFolder(content: folders.CreateFolderContent): Promise<folders.CreateFolderOutput> {
+    return await axios(this.generateAxiosRequest(folders.createFolder(content)))
       .catch(this.handleErrors)
       .then(this.getData);
   }
@@ -156,8 +168,8 @@ export class Make {
       .then(this.getData);
   }
 
-  async updateFolder(params: folders.UpdateFolderParams): Promise<folders.UpdateFolderOutput> {
-    return await axios(this.generateAxiosRequest(folders.updateFolder(params)))
+  async updateFolder(params: folders.UpdateFolderParams, content: folders.UpdateFolderContent): Promise<folders.UpdateFolderOutput> {
+    return await axios(this.generateAxiosRequest(folders.updateFolder(params, content)))
       .catch(this.handleErrors)
       .then(this.getData);
   }

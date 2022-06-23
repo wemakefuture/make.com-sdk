@@ -13,13 +13,16 @@ const formId: string = '221653079490459';
 const IMTCONN: number = 339401;
 
 test('testCreateHook', async () => {
-  const test = await make.createHook({
-    name: 'testing hook 1',
-    teamId: '60004',
-    typeName: 'jotform',
-    __IMTCONN__: IMTCONN,
-    formId: formId,
-  });
+  const test = await make.createHook(
+    {},
+    {
+      name: 'testing hook 1',
+      teamId: '60004',
+      typeName: 'jotform',
+      __IMTCONN__: IMTCONN,
+      formId: formId,
+    },
+  );
   //  console.log(test);
   hookId = test.hook.id;
   expect(test['hook']).toBeDefined();

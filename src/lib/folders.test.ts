@@ -17,7 +17,7 @@ test('testCreateFolder', async () => {
 });
 
 test('testUpdateFolder', async () => {
-  const testUpdateFolder = await make.updateFolder({ scenarioFolderId: folderId, name: 'Temp 1' });
+  const testUpdateFolder = await make.updateFolder({ scenarioFolderId: folderId }, { name: 'Temp 1' });
   expect(testUpdateFolder['scenarioFolder'].name).toEqual('Temp 1');
 });
 

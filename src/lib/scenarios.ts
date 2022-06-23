@@ -209,6 +209,9 @@ export function getScenarioExecutionLog(params: GetScenarioExecutionLogParams): 
 
 export interface UpdateScenarioParams {
   scenarioId: number;
+}
+
+export interface UpdateScenarioContent {
   folderId: number;
   blueprint: string;
   name: string;
@@ -220,16 +223,16 @@ export interface UpdateScenarioOutput {
   scenario: Scenario;
 }
 
-export function updateScenario(params: UpdateScenarioParams): MakeRequestConfig {
+export function updateScenario(params: UpdateScenarioParams, content: UpdateScenarioContent): MakeRequestConfig {
   const requestConfig: MakeRequestConfig = {
     method: 'patch',
     path: `/scenarios/${params.scenarioId}`,
-    body: params,
+    body: content,
   };
   return requestConfig;
 }
 
-export interface CreateScenarioParams {
+export interface CreateScenarioContent {
   blueprint: string;
   teamId: number;
   scheduling: string;
@@ -241,11 +244,11 @@ export interface CreateScenarioOutput {
   scenario: Scenario;
 }
 
-export function createScenario(params: CreateScenarioParams): MakeRequestConfig {
+export function createScenario(content: CreateScenarioContent): MakeRequestConfig {
   const requestConfig: MakeRequestConfig = {
     method: 'post',
     path: '/scenarios',
-    body: params,
+    body: content,
   };
   return requestConfig;
 }
@@ -287,6 +290,9 @@ export interface CloneScenarioParams {
   organizationId: number;
   notAnalyze?: boolean;
   scenarioId: number;
+}
+
+export interface CloneScenarioContent {
   name: string;
   teamId: number;
   states: boolean;
@@ -297,12 +303,12 @@ export interface CloneScenarioOutput {
   scenario: Scenario;
 }
 
-export function cloneScenario(params: CloneScenarioParams): MakeRequestConfig {
+export function cloneScenario(params: CloneScenarioParams, content: CloneScenarioContent): MakeRequestConfig {
   const requestConfig: MakeRequestConfig = {
     method: 'post',
     path: `/scenarios/${params.scenarioId}/clone`,
     queryStringObject: { ...params },
-    body: params,
+    body: content,
   };
   return requestConfig;
 }
