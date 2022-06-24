@@ -4,13 +4,13 @@ import credentials from '../credentials';
 const make = new Make({
   apiKey: credentials.make,
   host: 'eu1.make.com',
-  organizationId: 94920,
+  organizationId: 153178,
 });
 
 let folderId: number;
 
 test('testCreateFolder', async () => {
-  const testCreateFolder = await make.createFolder({ name: 'Folder 3', teamId: 60004 });
+  const testCreateFolder = await make.createFolder({ name: 'Folder 3', teamId: 95348 });
   folderId = testCreateFolder.scenarioFolder.id;
   //  console.log(testCreateFolder);
   expect(testCreateFolder['scenarioFolder']).toBeDefined();
@@ -22,7 +22,7 @@ test('testUpdateFolder', async () => {
 });
 
 test('testListFolders', async () => {
-  const testListFolders = await make.listFolders({ teamId: 60004 });
+  const testListFolders = await make.listFolders({ teamId: 95348 });
   expect(testListFolders['scenariosFolders'].length).toBeGreaterThanOrEqual(0);
 });
 

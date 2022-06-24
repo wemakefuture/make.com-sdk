@@ -4,20 +4,20 @@ import credentials from '../credentials';
 const make = new Make({
   apiKey: credentials.make,
   host: 'eu1.make.com',
-  organizationId: 94920,
+  organizationId: 153178,
 });
 //  create update list delete
 
 let scenarioId: number;
 let cloneScenarioId: number;
-const folderId: number = 27775;
+const folderId: number = 29327;
 let executionId: string;
 
 test('testCreateScenario', async () => {
   const test = await make.createScenario({
     blueprint:
       '{"name":"Integration Weather New","flow":[{"id":1,"module":"weather:ActionGetCurrentWeather","version":1,"parameters":{},"mapper":{"type":"name","city":"berlin"},"metadata":{"designer":{"x":0,"y":0},"restore":{"expect":{"type":{"label":"cities"}}},"expect":[{"name":"type","type":"select","label":"I want to enter a location by","required":true,"validate":{"enum":["name","coords"]}},{"name":"city","type":"text","label":"City","required":true}]}}],"metadata":{"instant":false,"version":1,"scenario":{"roundtrips":1,"maxErrors":3,"autoCommit":true,"autoCommitTriggerLast":true,"sequential":false,"confidential":false,"dataloss":false,"dlq":false},"designer":{"orphans":[]},"zone":"eu1.make.com"}}',
-    teamId: 60004,
+    teamId: 95348,
     folderId: folderId,
     concept: false,
     basedon: 20,
@@ -46,7 +46,7 @@ test('testUpdateScenario', async () => {
 
 test('testListScenario', async () => {
   //  console.log(JSON.stringify(await make.listScenarios({ organizationId: 94920, 'pg[limit]': 2 }), null, 4));
-  const test = await make.listScenarios({ organizationId: 94920, 'pg[limit]': 2 });
+  const test = await make.listScenarios({ organizationId: 153178, 'pg[limit]': 2 });
   //  console.log('last edit', test.scenarios[0].lastEdit);
   expect(test['scenarios'].length).toBeGreaterThanOrEqual(0);
 });
@@ -73,27 +73,21 @@ test('testStartScenario', async () => {
 });
 
 test('testListScenarioLogs', async () => {
-  const scenarioLogId = 349543;
-  const test = await make.listScenarioLogs({ scenarioId: scenarioLogId });
-  for (let i = 0; i < test.scenarioLogs.length; i++) {
-    if (test.scenarioLogs[i]['type'] == 'auto' || test.scenarioLogs[i]['type'] == 'manual') {
-      executionId = test.scenarioLogs[i]['id'].toString();
-      break;
-    }
-  }
-  console.log(executionId);
+  const test = await make.listScenarioLogs({ scenarioId: scenarioId });
   expect(test['scenarioLogs'].length).toBeGreaterThanOrEqual(0);
 });
 
 test('testGetScenarioExecutionLog', async () => {
-  const test = await make.getScenarioExecutionLog({ scenarioId: scenarioId, executionId: executionId });
-  console.log(test);
+  //  getting the executionId for the scenario
+  let id: string = '';
+  const temp = await make.listScenarioLogs({ scenarioId: scenarioId });
+  for (let i = 0; i < temp.scenarioLogs.length; i++) {
+    if (temp.scenarioLogs[i]['type'] == 'auto' || temp.scenarioLogs[i]['type'] == 'manual') {
+      id = temp.scenarioLogs[i]['id'].toString();
+    }
+  }
+  const test = await make.getScenarioExecutionLog({ scenarioId: scenarioId, executionId: id });
   expect(test['scenarioLog']).toBeDefined();
-});
-
-test('testStopScenario', async () => {
-  const test = await make.stopScenario({ scenarioId: scenarioId });
-  expect(test['scenario']).toBeDefined();
 });
 
 test('testGetScenarioBlueprint', async () => {
@@ -101,12 +95,17 @@ test('testGetScenarioBlueprint', async () => {
   expect(test).toBeDefined();
 });
 
+test('testStopScenario', async () => {
+  const test = await make.stopScenario({ scenarioId: scenarioId });
+  expect(test['scenario']).toBeDefined();
+});
+
 test('testCloneScenario', async () => {
   const test = await make.cloneScenario(
-    { organizationId: 94920, scenarioId: scenarioId },
+    { organizationId: 153178, scenarioId: scenarioId },
     {
       name: 'Integration Webhooks Copy 2',
-      teamId: 60004,
+      teamId: 95348,
       states: false,
     },
   );

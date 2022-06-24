@@ -4,20 +4,20 @@ import credentials from '../credentials';
 const make = new Make({
   apiKey: credentials.make,
   host: 'eu1.make.com',
-  organizationId: 94920,
+  organizationId: 153178,
 });
 //  create update list delete
 
 let hookId: number;
 const formId: string = '221653079490459';
-const IMTCONN: number = 339401;
+const IMTCONN: number = 365165;
 
 test('testCreateHook', async () => {
   const test = await make.createHook(
     {},
     {
       name: 'testing hook 1',
-      teamId: '60004',
+      teamId: '95348',
       typeName: 'jotform',
       __IMTCONN__: IMTCONN,
       formId: formId,
@@ -29,7 +29,7 @@ test('testCreateHook', async () => {
 });
 
 test('testListHooks', async () => {
-  const test = await make.listHooks({ teamId: 60004, typeName: 'gateway-webhook', assigned: true });
+  const test = await make.listHooks({ teamId: 95348, typeName: 'gateway-webhook', assigned: true });
   //  console.log(test);
   expect(test['hooks'].length).toBeGreaterThanOrEqual(0);
 });
