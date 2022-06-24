@@ -12,6 +12,7 @@ let scenarioId: number;
 let cloneScenarioId: number;
 const folderId: number = 29327;
 let executionId: string;
+let scenarioLogId: number = 351453;
 
 test('testCreateScenario', async () => {
   const test = await make.createScenario({
@@ -73,20 +74,20 @@ test('testStartScenario', async () => {
 });
 
 test('testListScenarioLogs', async () => {
-  const test = await make.listScenarioLogs({ scenarioId: scenarioId });
+  const test = await make.listScenarioLogs({ scenarioId: scenarioLogId });
   expect(test['scenarioLogs'].length).toBeGreaterThanOrEqual(0);
 });
 
 test('testGetScenarioExecutionLog', async () => {
   //  getting the executionId for the scenario
   let id: string = '';
-  const temp = await make.listScenarioLogs({ scenarioId: scenarioId });
+  const temp = await make.listScenarioLogs({ scenarioId: scenarioLogId });
   for (let i = 0; i < temp.scenarioLogs.length; i++) {
     if (temp.scenarioLogs[i]['type'] == 'auto' || temp.scenarioLogs[i]['type'] == 'manual') {
       id = temp.scenarioLogs[i]['id'].toString();
     }
   }
-  const test = await make.getScenarioExecutionLog({ scenarioId: scenarioId, executionId: id });
+  const test = await make.getScenarioExecutionLog({ scenarioId: scenarioLogId, executionId: id });
   expect(test['scenarioLog']).toBeDefined();
 });
 
