@@ -10,6 +10,7 @@ const make = new Make({
 let folderId: number;
 
 test('testCreateFolder', async () => {
+  await process.nextTick(() => {});
   const testCreateFolder = await make.createFolder({ name: 'Folder 3', teamId: 95348 });
   folderId = testCreateFolder.scenarioFolder.id;
   //  console.log(testCreateFolder);
@@ -17,16 +18,19 @@ test('testCreateFolder', async () => {
 });
 
 test('testUpdateFolder', async () => {
+  await process.nextTick(() => {});
   const testUpdateFolder = await make.updateFolder({ scenarioFolderId: folderId }, { name: 'Temp 1' });
   expect(testUpdateFolder['scenarioFolder'].name).toEqual('Temp 1');
 });
 
 test('testListFolders', async () => {
+  await process.nextTick(() => {});
   const testListFolders = await make.listFolders({ teamId: 95348 });
   expect(testListFolders['scenariosFolders'].length).toBeGreaterThanOrEqual(0);
 });
 
 test('testDeleteFolder', async () => {
+  await process.nextTick(() => {});
   const testDeleteFolder = await make.deleteFolder({ folderId: folderId });
   expect(testDeleteFolder['scenarioFolder']).toEqual(folderId);
 });

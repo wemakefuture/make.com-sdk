@@ -10,9 +10,8 @@ const make = new Make({
 
 let scenarioId: number;
 let cloneScenarioId: number;
-const folderId: number = 29327;
-let executionId: string;
-let scenarioLogId: number = 351453;
+const folderId = 29327;
+const scenarioLogId = 351453;
 
 test('testCreateScenario', async () => {
   const test = await make.createScenario({
@@ -80,7 +79,7 @@ test('testListScenarioLogs', async () => {
 
 test('testGetScenarioExecutionLog', async () => {
   //  getting the executionId for the scenario
-  let id: string = '';
+  let id = '';
   const temp = await make.listScenarioLogs({ scenarioId: scenarioLogId });
   for (let i = 0; i < temp.scenarioLogs.length; i++) {
     if (temp.scenarioLogs[i]['type'] == 'auto' || temp.scenarioLogs[i]['type'] == 'manual') {

@@ -5,15 +5,14 @@ import credentials from '../credentials';
 if (typeof require !== 'undefined' && require.main === module) {
   (async () => {
     const make = new Make({
-      apiKey: credentials.make,
+      apiKey: 'feaa1be7-0d24-4ae7-8d0e-bd4b8a9fe60c',
       host: 'eu1.make.com',
-      organizationId: 181,
+      organizationId: 2313,
     });
 
-    console.log(JSON.stringify(await make.listScenarios({ organizationId: 181, 'pg[limit]': 2 }), null, 4));
-
-    const test = await make.listScenarios({ organizationId: 181, 'pg[limit]': 2 });
-    console.log('last edit', test.scenarios[0].lastEdit);
+    console.log(
+      JSON.stringify(await make.getScenarioExecutionLog({ scenarioId: 347218, executionId: '0b0cbd34408a4ee39e30bd8ea95b7142' }), null, 4),
+    );
 
     // console.log(await make.createFolder({ teamId: 2313, name: 'Soooome folder' }));
 
