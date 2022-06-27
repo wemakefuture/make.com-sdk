@@ -369,7 +369,11 @@ export interface Scenario {
 
 export interface ErrorHandlerParams {
   errorMessage?: string;
-  developer?: { userId?: string };
+  name?: string;
+  developer?: {
+    userId?: string;
+    name?: string;
+  };
   connectionId?: number;
   urgency?: number;
   department?: string;
