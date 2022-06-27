@@ -6,7 +6,7 @@ const config: Config.InitialOptions = {
   testEnvironment: 'node',
   testRegex: '\\.(test|spec)?\\.(ts|tsx)$', // '/tests/.*\\.(test|spec)?\\.(ts|tsx)$',
   moduleFileExtensions: ['ts', 'js', 'json', 'node'],
-  testTimeout: 15000,
+  testTimeout: 30000,
   modulePathIgnorePatterns: ['/_FUNCTIONS/integromat'],
   transformIgnorePatterns: [
     '/node_modules/(?!astronomia|date-holidays-parse)', // does not work unfortunately. Line could be deleted.

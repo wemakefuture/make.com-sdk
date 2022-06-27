@@ -220,7 +220,7 @@ export interface UpdateScenarioOutput {
   scenario: Scenario;
 }
 
-export function updateScenario(params: UpdateScenarioParams): MakeRequestConfig {
+export function updateScenario(params: UpdateScenarioParams, content: UpdateScenarioContent): MakeRequestConfig {
   const requestConfig: MakeRequestConfig = {
     method: 'patch',
     path: `/scenarios/${params.scenarioId}`,
@@ -229,7 +229,7 @@ export function updateScenario(params: UpdateScenarioParams): MakeRequestConfig 
   return requestConfig;
 }
 
-export interface CreateScenarioParams {
+export interface CreateScenarioContent {
   blueprint: string;
   teamId: number;
   scheduling: string;
@@ -241,11 +241,11 @@ export interface CreateScenarioOutput {
   scenario: Scenario;
 }
 
-export function createScenario(params: CreateScenarioParams): MakeRequestConfig {
+export function createScenario(content: CreateScenarioContent): MakeRequestConfig {
   const requestConfig: MakeRequestConfig = {
     method: 'post',
     path: '/scenarios',
-    body: params,
+    body: content,
   };
   return requestConfig;
 }
@@ -287,21 +287,41 @@ export interface CloneScenarioParams {
   organizationId: number;
   notAnalyze?: boolean;
   scenarioId: number;
+}
+
+export interface CloneScenarioContent {
   name: string;
   teamId: number;
   states: boolean;
-  account: Record<string, unknown>;
+  account?: Record<string, unknown>;
 }
 
 export interface CloneScenarioOutput {
   scenario: Scenario;
 }
 
-export function cloneScenario(params: CloneScenarioParams): MakeRequestConfig {
+export function cloneScenario(params: CloneScenarioParams, content: CloneScenarioContent): MakeRequestConfig {
   const requestConfig: MakeRequestConfig = {
     method: 'post',
     path: `/scenarios/${params.scenarioId}/clone`,
     queryStringObject: { ...params },
+    body: content,
+  };
+  return requestConfig;
+}
+
+export interface DeleteScenarioParams {
+  scenarioId: number;
+}
+
+export interface DeleteScenarioOutput {
+  scenario: number;
+}
+
+export function deleteScenario(params: DeleteScenarioParams): MakeRequestConfig {
+  const requestConfig: MakeRequestConfig = {
+    method: 'delete',
+    path: `/scenarios/${params.scenarioId}`,
   };
   return requestConfig;
 }
