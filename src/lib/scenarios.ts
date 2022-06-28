@@ -209,6 +209,9 @@ export function getScenarioExecutionLog(params: GetScenarioExecutionLogParams): 
 
 export interface UpdateScenarioParams {
   scenarioId: number;
+}
+
+export interface UpdateScenarioContent {
   folderId?: number;
   blueprint: string;
   name?: string;
@@ -224,7 +227,7 @@ export function updateScenario(params: UpdateScenarioParams, content: UpdateScen
   const requestConfig: MakeRequestConfig = {
     method: 'patch',
     path: `/scenarios/${params.scenarioId}`,
-    body: { blueprint: params.blueprint },
+    body: content,
   };
   return requestConfig;
 }
