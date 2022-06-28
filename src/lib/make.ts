@@ -180,8 +180,9 @@ export class Make {
 
   async createConnection(
     params: connection.CreateConnectionParams,
-    content: connection.CreateConnectionContent,
-  ): Promise<connection.CreateConnectionOutput> {
+    content: connection.CreateConnectionContent | connection.CreateConnectionContentApiKey,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ): Promise<any> {
     return await axios(this.generateAxiosRequest(connection.createConnection(params, content)))
       .catch(this.handleErrors)
       .then(this.getData);

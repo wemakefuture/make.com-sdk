@@ -1,8 +1,14 @@
-import { BaseMakeRequestParams, MakeRequestConfig } from './make';
+import { MakeRequestConfig } from './make';
 
 export interface CreateConnectionParams {
   teamId: number;
   inspector: number;
+}
+
+export interface CreateConnectionContentApiKey {
+  accountName: string;
+  accountType: string;
+  apiKey: string;
 }
 
 export interface CreateConnectionContent {
@@ -35,7 +41,18 @@ export interface Connection {
   uid: null;
 }
 
-export function createConnection(params: CreateConnectionParams, content: CreateConnectionContent): MakeRequestConfig {
+export interface CreateConnectionAPIKeyOutput {
+  formula: Formula;
+}
+
+export interface Formula {
+  success: Array<number | string>;
+}
+
+export function createConnection(
+  params: CreateConnectionParams,
+  content: CreateConnectionContent | CreateConnectionContentApiKey,
+): MakeRequestConfig {
   const requestConfig: MakeRequestConfig = {
     method: 'post',
     path: '/connections',
@@ -163,7 +180,7 @@ export function updateConnection(params: UpdateConnectionParams, content: Update
 
 export interface ListConnectionParams {
   teamId: number;
-  type: string;
+  type?: string;
 }
 
 export interface ListConnectionOutput {
