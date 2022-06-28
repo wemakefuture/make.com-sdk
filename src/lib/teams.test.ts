@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import Make from '../lib/make';
 import credentials from '../credentials';
 
@@ -10,6 +11,7 @@ const make = new Make({
 const organizationId = 153178;
 
 test('testListTeams', async () => {
+  await process.nextTick(() => {});
   const test = await make.listTeams({ organizationId: organizationId });
   expect(test.teams).toBeDefined();
 });

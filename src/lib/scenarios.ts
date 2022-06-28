@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import Make, { BaseMakeRequestParams, MakeRequestConfig } from './make';
+import { BaseMakeRequestParams, MakeRequestConfig } from './make';
 
 export interface ListScenariosParams extends BaseMakeRequestParams {
   organizationId: number;
@@ -136,7 +136,9 @@ export interface ListScenarioLogsParams extends BaseMakeRequestParams {
   from?: number;
   to?: number;
   status?: number;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   'pg[last]'?: boolean;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   'pg[showLast]'?: string;
   showCheckRuns?: boolean;
 }
@@ -196,6 +198,7 @@ export interface GetScenarioExecutionLogOutput {
 
 export interface ScenarioLog {
   organizationId: number;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   '@kindId': number;
 }
 
@@ -212,11 +215,11 @@ export interface UpdateScenarioParams {
 }
 
 export interface UpdateScenarioContent {
-  folderId: number;
+  folderId?: number;
   blueprint: string;
-  name: string;
-  scheduling: string;
-  concept: boolean;
+  name?: string;
+  scheduling?: string;
+  concept?: boolean;
 }
 
 export interface UpdateScenarioOutput {

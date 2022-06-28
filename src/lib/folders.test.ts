@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import Make from '../lib/make';
 import credentials from '../credentials';
 
@@ -13,7 +14,6 @@ test('testCreateFolder', async () => {
   await process.nextTick(() => {});
   const testCreateFolder = await make.createFolder({ name: 'Folder 3', teamId: 95348 });
   folderId = testCreateFolder.scenarioFolder.id;
-  //  console.log(testCreateFolder);
   expect(testCreateFolder['scenarioFolder']).toBeDefined();
 });
 
