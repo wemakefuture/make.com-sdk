@@ -38,40 +38,38 @@ export class Make {
 
   // ---------------------------- The actual functions --------------------------------------------
 
-  //  Hooks
-
-  async createHook(params: hooks.CreateHookParams): Promise<hooks.CreateHookOutput> {
-    return await axios(this.generateAxiosRequest(hooks.createHook(params)))
+  async createHook(params: hooks.CreateHookParams, content: hooks.CreateHookContent): Promise<hooks.CreateHookOutput> {
+    return axios(this.generateAxiosRequest(hooks.createHook(params, content)))
       .catch(this.handleErrors)
       .then(this.getData);
   }
 
   async listHooks(params: hooks.ListHooksParams): Promise<hooks.ListHooksOutput> {
-    return await axios(this.generateAxiosRequest(hooks.listHooks(params)))
+    return axios(this.generateAxiosRequest(hooks.listHooks(params)))
       .catch(this.handleErrors)
       .then(this.getData);
   }
 
   async deleteHook(params: hooks.DeleteHookParams): Promise<hooks.DeleteHookOutput> {
-    return await axios(this.generateAxiosRequest(hooks.deleteHook(params)))
+    return axios(this.generateAxiosRequest(hooks.deleteHook(params)))
       .catch(this.handleErrors)
       .then(this.getData);
   }
 
   async enableHook(params: hooks.EnableHookParams): Promise<hooks.EnableHookOutput> {
-    return await axios(this.generateAxiosRequest(hooks.enableHook(params)))
+    return axios(this.generateAxiosRequest(hooks.enableHook(params)))
       .catch(this.handleErrors)
       .then(this.getData);
   }
 
   async disableHook(params: hooks.DisableHookParams): Promise<hooks.DisableHookOutput> {
-    return await axios(this.generateAxiosRequest(hooks.disableHook(params)))
+    return axios(this.generateAxiosRequest(hooks.disableHook(params)))
       .catch(this.handleErrors)
       .then(this.getData);
   }
 
   async getHookDetails(params: hooks.GetHookDetailsParams): Promise<hooks.GetHookDetailsOutput> {
-    return await axios(this.generateAxiosRequest(hooks.getHookDetails(params)))
+    return axios(this.generateAxiosRequest(hooks.getHookDetails(params)))
       .catch(this.handleErrors)
       .then(this.getData);
   }
@@ -79,99 +77,109 @@ export class Make {
   // Scenario
 
   async getScenarioDetails(params: scenarios.GetScenarioDetailsParams): Promise<scenarios.GetScenarioDetailsOutput> {
-    return await axios(this.generateAxiosRequest(scenarios.getScenarioDetails(params)))
+    return axios(this.generateAxiosRequest(scenarios.getScenarioDetails(params)))
       .catch(this.handleErrors)
       .then(this.getData);
   }
 
   async listScenarios(params: scenarios.ListScenariosParams): Promise<scenarios.ListScenariosOutput> {
-    return await axios(this.generateAxiosRequest(scenarios.listScenarios(params)))
+    return axios(this.generateAxiosRequest(scenarios.listScenarios(params)))
       .catch(this.handleErrors)
       .then(this.getData);
   }
 
   async getScenarioBlueprint(params: scenarios.GetScenarioBlueprintParams): Promise<scenarios.GetScenarioBlueprintOutput> {
-    return await axios(this.generateAxiosRequest(scenarios.getScenarioBlueprint(params)))
+    return axios(this.generateAxiosRequest(scenarios.getScenarioBlueprint(params)))
       .catch(this.handleErrors)
       .then(this.getData);
   }
 
   async getScenarioTrigger(params: scenarios.GetScenarioTriggerParams): Promise<scenarios.GetScenarioTriggerOutput> {
-    return await axios(this.generateAxiosRequest(scenarios.getScenarioTrigger(params)))
+    return axios(this.generateAxiosRequest(scenarios.getScenarioTrigger(params)))
       .catch(this.handleErrors)
       .then(this.getData);
   }
 
   async listScenarioBlueprints(params: scenarios.ListScenarioBlueprintsParams): Promise<scenarios.ListScenarioBlueprintsOutput> {
-    return await axios(this.generateAxiosRequest(scenarios.listScenarioBlueprints(params)))
+    return axios(this.generateAxiosRequest(scenarios.listScenarioBlueprints(params)))
       .catch(this.handleErrors)
       .then(this.getData);
   }
 
   async listScenarioLogs(params: scenarios.ListScenarioLogsParams): Promise<scenarios.ListScenarioLogsOutput> {
-    return await axios(this.generateAxiosRequest(scenarios.listScenarioLogs(params)))
+    return axios(this.generateAxiosRequest(scenarios.listScenarioLogs(params)))
       .catch(this.handleErrors)
       .then(this.getData);
   }
 
   async getScenarioExecutionLog(params: scenarios.GetScenarioExecutionLogParams): Promise<scenarios.GetScenarioExecutionLogOutput> {
-    return await axios(this.generateAxiosRequest(scenarios.getScenarioExecutionLog(params)))
+    return axios(this.generateAxiosRequest(scenarios.getScenarioExecutionLog(params)))
       .catch(this.handleErrors)
       .then(this.getData);
   }
 
-  async updateScenario(params: scenarios.UpdateScenarioParams): Promise<scenarios.UpdateScenarioOutput> {
-    return await axios(this.generateAxiosRequest(scenarios.updateScenario(params)))
+  async updateScenario(
+    params: scenarios.UpdateScenarioParams,
+    content: scenarios.UpdateScenarioContent,
+  ): Promise<scenarios.UpdateScenarioOutput> {
+    return axios(this.generateAxiosRequest(scenarios.updateScenario(params, content)))
       .catch(this.handleErrors)
       .then(this.getData);
   }
 
-  async createScenario(params: scenarios.CreateScenarioParams): Promise<scenarios.CreateScenarioOutput> {
-    return await axios(this.generateAxiosRequest(scenarios.createScenario(params)))
+  async createScenario(content: scenarios.CreateScenarioContent): Promise<scenarios.CreateScenarioOutput> {
+    return axios(this.generateAxiosRequest(scenarios.createScenario(content)))
       .catch(this.handleErrors)
       .then(this.getData);
   }
 
   async startScenario(params: scenarios.StartScenarioParams): Promise<scenarios.StartScenarioOutput> {
-    return await axios(this.generateAxiosRequest(scenarios.startScenario(params)))
+    return axios(this.generateAxiosRequest(scenarios.startScenario(params)))
       .catch(this.handleErrors)
       .then(this.getData);
   }
 
   async stopScenario(params: scenarios.StopScenarioParams): Promise<scenarios.StopScenarioOutput> {
-    return await axios(this.generateAxiosRequest(scenarios.stopScenario(params)))
+    return axios(this.generateAxiosRequest(scenarios.stopScenario(params)))
       .catch(this.handleErrors)
       .then(this.getData);
   }
 
-  async cloneScenario(params: scenarios.CloneScenarioParams): Promise<scenarios.CloneScenarioOutput> {
-    return await axios(this.generateAxiosRequest(scenarios.cloneScenario(params)))
+  async cloneScenario(
+    params: scenarios.CloneScenarioParams,
+    content: scenarios.CloneScenarioContent,
+  ): Promise<scenarios.CloneScenarioOutput> {
+    return axios(this.generateAxiosRequest(scenarios.cloneScenario(params, content)))
       .catch(this.handleErrors)
       .then(this.getData);
   }
 
-  //  Folder
+  async deleteScenario(params: scenarios.DeleteScenarioParams): Promise<scenarios.DeleteScenarioOutput> {
+    return axios(this.generateAxiosRequest(scenarios.deleteScenario(params)))
+      .catch(this.handleErrors)
+      .then(this.getData);
+  }
 
-  async createFolder(params: folders.CreateFolderParams): Promise<folders.CreateFolderOutput> {
-    return await axios(this.generateAxiosRequest(folders.createFolder(params)))
+  async createFolder(content: folders.CreateFolderContent): Promise<folders.CreateFolderOutput> {
+    return axios(this.generateAxiosRequest(folders.createFolder(content)))
       .catch(this.handleErrors)
       .then(this.getData);
   }
 
   async deleteFolder(params: folders.DeleteFolderParams): Promise<folders.DeleteFolderOutput> {
-    return await axios(this.generateAxiosRequest(folders.deleteFolder(params)))
+    return axios(this.generateAxiosRequest(folders.deleteFolder(params)))
       .catch(this.handleErrors)
       .then(this.getData);
   }
 
-  async updateFolder(params: folders.UpdateFolderParams): Promise<folders.UpdateFolderOutput> {
-    return await axios(this.generateAxiosRequest(folders.updateFolder(params)))
+  async updateFolder(params: folders.UpdateFolderParams, content: folders.UpdateFolderContent): Promise<folders.UpdateFolderOutput> {
+    return axios(this.generateAxiosRequest(folders.updateFolder(params, content)))
       .catch(this.handleErrors)
       .then(this.getData);
   }
 
   async listFolders(params: folders.ListFoldersParams): Promise<folders.ListFoldersOutput> {
-    return await axios(this.generateAxiosRequest(folders.listFolders(params)))
+    return axios(this.generateAxiosRequest(folders.listFolders(params)))
       .catch(this.handleErrors)
       .then(this.getData);
   }
@@ -183,13 +191,13 @@ export class Make {
     content: connection.CreateConnectionContent | connection.CreateConnectionContentApiKey,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ): Promise<any> {
-    return await axios(this.generateAxiosRequest(connection.createConnection(params, content)))
+    return axios(this.generateAxiosRequest(connection.createConnection(params, content)))
       .catch(this.handleErrors)
       .then(this.getData);
   }
 
   async testConnection(params: connection.TestConnectionParams): Promise<connection.TestConnectionOutput> {
-    return await axios(this.generateAxiosRequest(connection.testConnection(params)))
+    return axios(this.generateAxiosRequest(connection.testConnection(params)))
       .catch(this.handleErrors)
       .then(this.getData);
   }
@@ -198,7 +206,7 @@ export class Make {
     params: connection.ScopedConnectionParams,
     content: connection.ScopedConnectionContent,
   ): Promise<connection.ScopedConnectionOutput> {
-    return await axios(this.generateAxiosRequest(connection.scopedConnection(params, content)))
+    return axios(this.generateAxiosRequest(connection.scopedConnection(params, content)))
       .catch(this.handleErrors)
       .then(this.getData);
   }
@@ -207,7 +215,7 @@ export class Make {
     params: connection.SetDataConnectionParams,
     content: connection.SetDataConnectionContent,
   ): Promise<connection.SetDataConnectionOutput> {
-    return await axios(this.generateAxiosRequest(connection.setDataConnection(params, content)))
+    return axios(this.generateAxiosRequest(connection.setDataConnection(params, content)))
       .catch(this.handleErrors)
       .then(this.getData);
   }
@@ -216,32 +224,32 @@ export class Make {
     params: connection.UpdateConnectionParams,
     content: connection.UpdateConnectionContent,
   ): Promise<connection.UpdateConnectionOutput> {
-    return await axios(this.generateAxiosRequest(connection.updateConnection(params, content)))
+    return axios(this.generateAxiosRequest(connection.updateConnection(params, content)))
       .catch(this.handleErrors)
       .then(this.getData);
   }
 
   async listConnection(params: connection.ListConnectionParams): Promise<connection.ListConnectionOutput> {
-    return await axios(this.generateAxiosRequest(connection.listConnection(params)))
+    return axios(this.generateAxiosRequest(connection.listConnection(params)))
       .catch(this.handleErrors)
       .then(this.getData);
   }
 
   async getConnectionDetails(params: connection.GetConnectionDetailsParams): Promise<connection.GetConnectionDetailsOutput> {
-    return await axios(this.generateAxiosRequest(connection.getConnectionDetails(params)))
+    return axios(this.generateAxiosRequest(connection.getConnectionDetails(params)))
       .catch(this.handleErrors)
       .then(this.getData);
   }
 
   async deleteConnection(params: connection.DeleteConnectionParams): Promise<connection.DeleteConnectionOutput> {
-    return await axios(this.generateAxiosRequest(connection.deleteConnection(params)))
+    return axios(this.generateAxiosRequest(connection.deleteConnection(params)))
       .catch(this.handleErrors)
       .then(this.getData);
   }
 
   //  Teams
   async listTeams(params: teams.ListTeamsParams): Promise<teams.ListTeamsOutput> {
-    return await axios(this.generateAxiosRequest(teams.listTeams(params)))
+    return axios(this.generateAxiosRequest(teams.listTeams(params)))
       .catch(this.handleErrors)
       .then(this.getData);
   }

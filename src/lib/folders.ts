@@ -1,6 +1,6 @@
 import { BaseMakeRequestParams, MakeRequestConfig } from './make';
 
-export interface CreateFolderParams extends BaseMakeRequestParams {
+export interface CreateFolderContent extends BaseMakeRequestParams {
   teamId: number;
   name: string;
 }
@@ -17,11 +17,11 @@ export interface ScenarioFolder {
   scenariosTotal: number;
 }
 
-export function createFolder(params: CreateFolderParams): MakeRequestConfig {
+export function createFolder(content: CreateFolderContent): MakeRequestConfig {
   const requestConfig: MakeRequestConfig = {
     method: 'post',
     path: '/scenarios-folders',
-    body: params,
+    body: content,
   };
   return requestConfig;
 }
@@ -44,6 +44,9 @@ export function deleteFolder(params: DeleteFolderParams): MakeRequestConfig {
 
 export interface UpdateFolderParams {
   scenarioFolderId: number;
+}
+
+export interface UpdateFolderContent {
   name: string;
 }
 
@@ -51,11 +54,11 @@ export interface UpdateFolderOutput {
   scenarioFolder: ScenarioFolder;
 }
 
-export function updateFolder(params: UpdateFolderParams): MakeRequestConfig {
+export function updateFolder(params: UpdateFolderParams, content: UpdateFolderContent): MakeRequestConfig {
   const requestConfig: MakeRequestConfig = {
     method: 'patch',
     path: `/scenarios-folders/${params.scenarioFolderId}`,
-    body: params,
+    body: content,
   };
   return requestConfig;
 }

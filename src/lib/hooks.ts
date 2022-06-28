@@ -2,6 +2,9 @@ import Make, { BaseMakeRequestParams, MakeRequestConfig } from './make';
 
 export interface CreateHookParams {
   inspector?: number;
+}
+
+export interface CreateHookContent {
   name: string;
   teamId: string;
   typeName: string;
@@ -38,12 +41,12 @@ export interface Data {
   url: string;
 }
 
-export function createHook(params: CreateHookParams): MakeRequestConfig {
+export function createHook(params: CreateHookParams, content: CreateHookContent): MakeRequestConfig {
   const requestConfig: MakeRequestConfig = {
     method: 'post',
     path: '/hooks',
     queryStringObject: { ...params },
-    body: params,
+    body: content,
   };
   return requestConfig;
 }
