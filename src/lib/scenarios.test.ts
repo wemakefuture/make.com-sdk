@@ -51,6 +51,7 @@ test('testListScenario', async () => {
   //  console.log('last edit', test.scenarios[0].lastEdit);
   // eslint-disable-next-line @typescript-eslint/naming-convention
   const test = await make.listScenarios({ organizationId: 153178, 'pg[limit]': 2 });
+  console.log(test);
   expect(test['scenarios'].length).toBeGreaterThanOrEqual(0);
 });
 
