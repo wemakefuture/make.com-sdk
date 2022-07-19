@@ -1,6 +1,6 @@
 {
   "name": "asm-make-sdk",
-  "version": "1.0.14",
+  "version": "1.0.30",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -30,7 +30,7 @@
     "build": "tsc",
     "watch": "tsc -w",
     "start": "func host start --script-root src/azure",
-    "test": "jest --detectOpenHandles",
+    "test": "jest --detectOpenHandles --runInBand",
     "example": "npm run build && node ./dist/examples/testFile.js",
     "testnew": "jest -t \"new\"",
     "new": "ts-node ./_SRC/scripts/newFunction.ts",

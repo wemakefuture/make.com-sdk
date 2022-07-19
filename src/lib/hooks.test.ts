@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import Make from '../lib/make';
 import credentials from '../credentials';
 
@@ -19,11 +20,11 @@ test('testCreateHook', async () => {
       name: 'testing hook 1',
       teamId: '95348',
       typeName: 'jotform',
+      // eslint-disable-next-line @typescript-eslint/naming-convention
       __IMTCONN__: IMTCONN,
       formId: formId,
     },
   );
-  //  console.log(test);
   hookId = test.hook.id;
   expect(test['hook']).toBeDefined();
 });
@@ -31,7 +32,6 @@ test('testCreateHook', async () => {
 test('testListHooks', async () => {
   await process.nextTick(() => {});
   const test = await make.listHooks({ teamId: 95348, typeName: 'gateway-webhook', assigned: true });
-  //  console.log(test);
   expect(test['hooks'].length).toBeGreaterThanOrEqual(0);
 });
 
@@ -50,13 +50,11 @@ test('testDisableHook', async () => {
 test('testGetHookDetails', async () => {
   await process.nextTick(() => {});
   const test = await make.getHookDetails({ hookId: hookId });
-  //  console.log(test);
   expect(test['hook']).toBeDefined();
 });
 
 test('testDeleteHook', async () => {
   await process.nextTick(() => {});
   const test = await make.deleteHook({ hookId: hookId, confirmed: true });
-  //  console.log(test);
   expect(test['hook']).toEqual(hookId);
 });

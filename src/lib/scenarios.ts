@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import Make, { BaseMakeRequestParams, MakeRequestConfig } from './make';
+import { BaseMakeRequestParams, MakeRequestConfig } from './make';
 
 export interface ListScenariosParams extends BaseMakeRequestParams {
   organizationId: number;
@@ -136,7 +136,9 @@ export interface ListScenarioLogsParams extends BaseMakeRequestParams {
   from?: number;
   to?: number;
   status?: number;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   'pg[last]'?: boolean;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   'pg[showLast]'?: string;
   showCheckRuns?: boolean;
 }
@@ -196,6 +198,7 @@ export interface GetScenarioExecutionLogOutput {
 
 export interface ScenarioLog {
   organizationId: number;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   '@kindId': number;
 }
 
@@ -212,11 +215,11 @@ export interface UpdateScenarioParams {
 }
 
 export interface UpdateScenarioContent {
-  folderId: number;
+  folderId?: number;
   blueprint: string;
-  name: string;
-  scheduling: string;
-  concept: boolean;
+  name?: string;
+  scheduling?: string;
+  concept?: boolean;
 }
 
 export interface UpdateScenarioOutput {
@@ -351,146 +354,28 @@ export interface Response {
 }
 
 export interface BlueprintType {
+  name?: string;
   flow: Module[];
-  name: string;
-  metadata: BlueprintTypeMetadata;
+  metadata?: BlueprintTypeMetadata;
 }
 
 export interface Module {
   id: number;
-  mapper: ModuleMapper;
+  mapper: any;
   module: string;
-  onerror?: Onerror[];
+  onerror?: Module[];
   version: number;
-  metadata: ModuleMetadata;
-  parameters: ModuleParameters;
-  routes: BlueprintType[]; // if Router
-}
-
-export interface ModuleMapper {
-  ca: string;
-  qs: any[];
-  url: string;
-  gzip: boolean;
-  method: string;
-  headers: any[];
-  timeout: string;
-  authPass: string;
-  authUser: string;
-  bodyType: string;
-  shareCookies: boolean;
-  parseResponse: boolean;
-  followRedirect: boolean;
-  useQuerystring: boolean;
-  rejectUnauthorized: boolean;
-}
-
-export interface ModuleMetadata {
-  expect: Expect[];
-  restore: PurpleRestore;
-  designer: PurpleDesigner;
-  parameters: Parameter[];
-}
-
-export interface PurpleDesigner {
-  x: number;
-  y: number;
-}
-
-export interface Expect {
-  name: string;
-  type: string;
-  label: string;
-  required?: boolean;
-  validate?: Validate;
-  spec?: Parameter[];
-  labels?: Labels;
-  multiline?: boolean;
-}
-
-export interface Labels {
-  add: string;
-  edit: string;
-}
-
-export interface Parameter {
-  name: string;
-  type: string;
-  label: string;
-  required?: boolean;
-}
-
-export interface Validate {
-  enum?: string[];
-  max?: number;
-  min?: number;
-}
-
-export interface PurpleRestore {
-  qs: Headers;
-  method: Method;
-  headers: Headers;
-  bodyType: BodyType;
-}
-
-export interface BodyType {
-  label: string;
-}
-
-export interface Headers {
-  mode: string;
-  items: any[];
-}
-
-export interface Method {
-  mode: string;
-  label: string;
-}
-
-export interface Onerror {
-  id: number;
-  mapper: OnerrorMapper;
-  module: string;
-  version: number;
-  metadata: OnerrorMetadata;
-  parameters: OnerrorParameters;
-}
-
-export interface OnerrorMapper {
-  count: string;
-  retry: boolean;
-  interval: string;
-}
-
-export interface OnerrorMetadata {
-  expect: Parameter[];
-  restore: FluffyRestore;
-  designer: PurpleDesigner;
-}
-
-export interface FluffyRestore {
-  retry: Retry;
-}
-
-export interface Retry {
-  mode: string;
-}
-
-export interface OnerrorParameters {
-  name: string;
-  type: string;
-  label: string;
-  required: boolean;
-}
-
-export interface ModuleParameters {
-  handleErrors: boolean;
+  metadata: any;
+  parameters?: any;
+  routes?: BlueprintType[]; // if Router
 }
 
 export interface BlueprintTypeMetadata {
+  instant: boolean;
   version: number;
-  designer: FluffyDesigner;
   scenario: Scenario;
+  designer: FluffyDesigner;
+  zone?: string;
 }
 
 export interface FluffyDesigner {
@@ -498,14 +383,36 @@ export interface FluffyDesigner {
 }
 
 export interface Scenario {
-  dlq: boolean;
-  dataloss: boolean;
+  roundtrips: number;
   maxErrors: number;
   autoCommit: boolean;
-  roundtrips: number;
+  autoCommitTriggerLast: boolean;
   sequential: boolean;
   confidential: boolean;
-  autoCommitTriggerLast: boolean;
+  dataloss: boolean;
+  dlq: boolean;
+}
+
+export interface ErrorHandlerParams {
+  errorMessage?: string;
+  name?: string;
+  developer?: {
+    userId?: string;
+    name?: string;
+  };
+  connectionId?: number;
+  urgency?: number;
+  department?: string;
+  risk?: number;
+  webHookUrl?: string;
+  behaviour?: number;
+  launch?: {
+    overwriteErrorHandler?: boolean;
+    enableModule?: boolean;
+    emailNotification?: boolean;
+  };
+  creationDate?: Date;
+  lastEdit?: Date;
 }
 
 export function getScenarioBlueprint(params: GetScenarioBlueprintParams): MakeRequestConfig {
