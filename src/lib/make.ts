@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosPromise, AxiosRequestConfig, AxiosResponse } from 'axios';
 import * as scenarios from './scenarios';
 import * as folders from './folders';
 import * as queryStringLib from 'query-string';
@@ -197,9 +197,20 @@ export class Make {
   }
 
   async testConnection(params: connection.TestConnectionParams): Promise<connection.TestConnectionOutput> {
-    return axios(this.generateAxiosRequest(connection.testConnection(params)))
-      .catch(this.handleErrors)
-      .then(this.getData);
+    return new Promise((resolve, reject) => {
+      axios(this.generateAxiosRequest(connection.testConnection(params)))
+        .then(
+          (response) => {
+            resolve(response.data as connection.TestConnectionOutput);
+          },
+          (err) => {
+            reject(err);
+          },
+        )
+        .catch((err) => {
+          reject(err);
+        });
+    });
   }
 
   async scopedConnection(
@@ -233,6 +244,10 @@ export class Make {
     return axios(this.generateAxiosRequest(connection.listConnection(params)))
       .catch(this.handleErrors)
       .then(this.getData);
+
+
+
+
   }
 
   async getConnectionDetails(params: connection.GetConnectionDetailsParams): Promise<connection.GetConnectionDetailsOutput> {
