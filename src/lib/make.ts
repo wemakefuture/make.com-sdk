@@ -241,13 +241,20 @@ export class Make {
   }
 
   async listConnection(params: connection.ListConnectionParams): Promise<connection.ListConnectionOutput> {
-    return axios(this.generateAxiosRequest(connection.listConnection(params)))
-      .catch(this.handleErrors)
-      .then(this.getData);
-
-
-
-
+    return new Promise((resolve, reject) => {
+      return axios(this.generateAxiosRequest(connection.listConnection(params)))
+        .then(
+          (response) => {
+            resolve(response.data as connection.ListConnectionOutput);
+          },
+          (err) => {
+            reject(err);
+          },
+        )
+        .catch((err) => {
+          reject(err);
+        });
+    });
   }
 
   async getConnectionDetails(params: connection.GetConnectionDetailsParams): Promise<connection.GetConnectionDetailsOutput> {
