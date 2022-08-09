@@ -404,7 +404,7 @@ export interface ErrorHandlerParams {
   urgency?: number;
   department?: string;
   risk?: number;
-  webHookUrl?: string;
+  additionalInfo?: string;
   behaviour?: number;
   launch?: {
     overwriteErrorHandler?: boolean;
