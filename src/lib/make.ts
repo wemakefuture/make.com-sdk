@@ -6,6 +6,7 @@ import * as queryStringLib from 'query-string';
 import * as hooks from './hooks';
 import * as connection from './connections';
 import * as teams from './teams';
+import * as apps from './apps';
 
 interface MakeConfig {
   apiKey: string;
@@ -272,6 +273,13 @@ export class Make {
   //  Teams
   async listTeams(params: teams.ListTeamsParams): Promise<teams.ListTeamsOutput> {
     return axios(this.generateAxiosRequest(teams.listTeams(params)))
+      .catch(this.handleErrors)
+      .then(this.getData);
+  }
+
+  // Apps
+  async appInvite(params: apps.AppInviteParams, content: apps.AppInviteContent): Promise<apps.AppInviteOutput> {
+    return axios(this.generateAxiosRequest(apps.appInvite(params, content)))
       .catch(this.handleErrors)
       .then(this.getData);
   }
