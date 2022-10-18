@@ -1,6 +1,6 @@
 {
   "name": "asm-make-sdk",
-  "version": "1.1.5",
+  "version": "1.0.1",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -43,7 +43,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git@ssh.dev.azure.com:v3/0x21/ASM/asm-make-sdk"
+    "url": "git@ssh.dev.azure.com:v3/SMAWK/Aservment/aservment-make-sdk"
   },
   "author": "Dominik Arnold",
   "dependencies": {
