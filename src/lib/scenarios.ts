@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import Make, { BaseMakeRequestParams, MakeRequestConfig } from './make';
+import { BaseMakeRequestParams, MakeRequestConfig } from './make';
 
 export interface ListScenariosParams extends BaseMakeRequestParams {
   organizationId: number;
@@ -136,7 +136,9 @@ export interface ListScenarioLogsParams extends BaseMakeRequestParams {
   from?: number;
   to?: number;
   status?: number;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   'pg[last]'?: boolean;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   'pg[showLast]'?: string;
   showCheckRuns?: boolean;
 }
@@ -196,6 +198,7 @@ export interface GetScenarioExecutionLogOutput {
 
 export interface ScenarioLog {
   organizationId: number;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   '@kindId': number;
 }
 
@@ -209,27 +212,30 @@ export function getScenarioExecutionLog(params: GetScenarioExecutionLogParams): 
 
 export interface UpdateScenarioParams {
   scenarioId: number;
-  folderId: number;
+}
+
+export interface UpdateScenarioContent {
+  folderId?: number;
   blueprint: string;
-  name: string;
-  scheduling: string;
-  concept: boolean;
+  name?: string;
+  scheduling?: string;
+  concept?: boolean;
 }
 
 export interface UpdateScenarioOutput {
   scenario: Scenario;
 }
 
-export function updateScenario(params: UpdateScenarioParams): MakeRequestConfig {
+export function updateScenario(params: UpdateScenarioParams, content: UpdateScenarioContent): MakeRequestConfig {
   const requestConfig: MakeRequestConfig = {
     method: 'patch',
     path: `/scenarios/${params.scenarioId}`,
-    body: params,
+    body: content,
   };
   return requestConfig;
 }
 
-export interface CreateScenarioParams {
+export interface CreateScenarioContent {
   blueprint: string;
   teamId: number;
   scheduling: string;
@@ -241,11 +247,11 @@ export interface CreateScenarioOutput {
   scenario: Scenario;
 }
 
-export function createScenario(params: CreateScenarioParams): MakeRequestConfig {
+export function createScenario(content: CreateScenarioContent): MakeRequestConfig {
   const requestConfig: MakeRequestConfig = {
     method: 'post',
     path: '/scenarios',
-    body: params,
+    body: content,
   };
   return requestConfig;
 }
@@ -287,21 +293,41 @@ export interface CloneScenarioParams {
   organizationId: number;
   notAnalyze?: boolean;
   scenarioId: number;
+}
+
+export interface CloneScenarioContent {
   name: string;
   teamId: number;
   states: boolean;
-  account: Record<string, unknown>;
+  account?: Record<string, unknown>;
 }
 
 export interface CloneScenarioOutput {
   scenario: Scenario;
 }
 
-export function cloneScenario(params: CloneScenarioParams): MakeRequestConfig {
+export function cloneScenario(params: CloneScenarioParams, content: CloneScenarioContent): MakeRequestConfig {
   const requestConfig: MakeRequestConfig = {
     method: 'post',
     path: `/scenarios/${params.scenarioId}/clone`,
     queryStringObject: { ...params },
+    body: content,
+  };
+  return requestConfig;
+}
+
+export interface DeleteScenarioParams {
+  scenarioId: number;
+}
+
+export interface DeleteScenarioOutput {
+  scenario: number;
+}
+
+export function deleteScenario(params: DeleteScenarioParams): MakeRequestConfig {
+  const requestConfig: MakeRequestConfig = {
+    method: 'delete',
+    path: `/scenarios/${params.scenarioId}`,
   };
   return requestConfig;
 }
@@ -367,11 +393,26 @@ export interface Scenario {
   dlq: boolean;
 }
 
-interface ErrorHandlerParams {
-  developer: string;
-  connectionId: number;
-  errorCode?: string;
-  level?: number;
+export interface ErrorHandlerParams {
+  errorMessage?: string;
+  name?: string;
+  developer?: {
+    userId?: string;
+    name?: string;
+  };
+  connectionId?: number;
+  urgency?: number;
+  department?: string;
+  risk?: number;
+  additionalInfo?: string;
+  behaviour?: number;
+  launch?: {
+    overwriteErrorHandler?: boolean;
+    enableModule?: boolean;
+    emailNotification?: boolean;
+  };
+  creationDate?: Date;
+  lastEdit?: Date;
 }
 
 export function getScenarioBlueprint(params: GetScenarioBlueprintParams): MakeRequestConfig {

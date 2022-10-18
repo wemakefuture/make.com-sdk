@@ -1,10 +1,15 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import Make, { BaseMakeRequestParams, MakeRequestConfig } from './make';
 
 export interface CreateHookParams {
   inspector?: number;
+}
+
+export interface CreateHookContent {
   name: string;
   teamId: string;
   typeName: string;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   __IMTCONN__: number;
   formId: string;
 }
@@ -32,18 +37,19 @@ export interface Hook {
 }
 
 export interface Data {
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   __IMTCONN__: number;
   formId: string;
   teamId?: number;
   url: string;
 }
 
-export function createHook(params: CreateHookParams): MakeRequestConfig {
+export function createHook(params: CreateHookParams, content: CreateHookContent): MakeRequestConfig {
   const requestConfig: MakeRequestConfig = {
     method: 'post',
     path: '/hooks',
     queryStringObject: { ...params },
-    body: params,
+    body: content,
   };
   return requestConfig;
 }
