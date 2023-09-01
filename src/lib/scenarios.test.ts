@@ -5,7 +5,7 @@ import credentials from '../credentials';
 const make = new Make({
   apiKey: credentials.make,
   host: 'eu1.make.com',
-  organizationId: 153178,
+  organizationId: 94307,
 });
 //  create update list delete
 
@@ -19,13 +19,14 @@ test('testCreateScenario', async () => {
   const test = await make.createScenario({
     blueprint:
       '{"name":"Integration Weather New","flow":[{"id":1,"module":"weather:ActionGetCurrentWeather","version":1,"parameters":{},"mapper":{"type":"name","city":"berlin"},"metadata":{"designer":{"x":0,"y":0},"restore":{"expect":{"type":{"label":"cities"}}},"expect":[{"name":"type","type":"select","label":"I want to enter a location by","required":true,"validate":{"enum":["name","coords"]}},{"name":"city","type":"text","label":"City","required":true}]}}],"metadata":{"instant":false,"version":1,"scenario":{"roundtrips":1,"maxErrors":3,"autoCommit":true,"autoCommitTriggerLast":true,"sequential":false,"confidential":false,"dataloss":false,"dlq":false},"designer":{"orphans":[]},"zone":"eu1.make.com"}}',
-    teamId: 95348,
+    teamId: 59658,
     folderId: folderId,
     concept: false,
     basedon: 20,
     scheduling: '{"type":"indefinitely","interval":900}',
   });
-  scenarioId = test.scenario.id;
+  // scenarioId = test.scenario.id;
+  console.log(test);
   expect(test).toBeDefined();
 });
 

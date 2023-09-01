@@ -5,10 +5,10 @@ import credentials from '../credentials';
 const make = new Make({
   apiKey: credentials.make,
   host: 'eu1.make.com',
-  organizationId: 153178,
+  organizationId: 94307,
 });
 
-const organizationId = 153178;
+const organizationId = 94307;
 
 test('testListTeams', async () => {
   await process.nextTick(() => {});

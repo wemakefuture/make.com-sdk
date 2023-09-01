@@ -277,9 +277,43 @@ export class Make {
       .then(this.getData);
   }
 
-  // Apps
+  // Invites
   async appInvite(params: apps.AppInviteParams, content: apps.AppInviteContent): Promise<apps.AppInviteOutput> {
     return axios(this.generateAxiosRequest(apps.appInvite(params, content)))
+      .catch(this.handleErrors)
+      .then(this.getData);
+  }
+
+  // Apps
+  async createApp(content: apps.CreateAppContent): Promise<apps.CreateAppOutput> {
+    return axios(this.generateAxiosRequest(apps.createApp(content)))
+      .catch(this.handleErrors)
+      .then(this.getData);
+  }
+
+  async listApps(): Promise<apps.ListAppsOutput> {
+    return axios(this.generateAxiosRequest(apps.listApps())).catch(this.handleErrors).then(this.getData);
+  }
+
+  async getAppSection(params: apps.GetAppSectionParams): Promise<apps.GetAppSectionOutput> {
+    return axios(this.generateAxiosRequest(apps.getAppSection(params)))
+      .catch(this.handleErrors)
+      .then(this.getData);
+  }
+
+  // Modules
+  async createModule(params: apps.CreateModuleParams, content: apps.CreateModuleContent): Promise<apps.CreateModuleOutput> {
+    return axios(this.generateAxiosRequest(apps.createModule(params, content)))
+      .catch(this.handleErrors)
+      .then(this.getData);
+  }
+
+  // AppConnections
+  async createAppConnection(
+    params: apps.CreateAppConnectionParams,
+    content: apps.CreateAppConnectionContent,
+  ): Promise<apps.CreateAppConnectionOutput> {
+    return axios(this.generateAxiosRequest(apps.createAppConnection(params, content)))
       .catch(this.handleErrors)
       .then(this.getData);
   }
