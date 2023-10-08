@@ -45,6 +45,18 @@ test('getAppSection', async () => {
   expect(getAppSection).toBeDefined();
 });
 
+test('updateAppSection', async () => {
+  await process.nextTick(() => {});
+  const updateAppSection = await make.updateAppSection(
+    { appName: 'codekit-dev-86a69u', appVersion: 1, section: 'base' },
+    {
+      baseUrl: 'https://example.com',
+    },
+  );
+  console.log(updateAppSection);
+  expect(updateAppSection).toBeDefined();
+});
+
 test('createModule', async () => {
   await process.nextTick(() => {});
   const createModule = await make.createModule(

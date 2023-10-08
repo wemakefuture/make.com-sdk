@@ -39,6 +39,21 @@ export interface GetAppSectionOutput {
   [key: string]: any; // eslint-disable-line @typescript-eslint/no-explicit-any
 }
 
+export interface UpdateAppSectionOutput {
+  [key: string]: any; // eslint-disable-line @typescript-eslint/no-explicit-any
+}
+
+export interface UpdateAppSectionParams {
+  appName: string;
+  appVersion: number;
+  section: string;
+}
+
+export interface UpdateAppSectionContent {
+  baseUrl: string;
+  [key: string]: any; // eslint-disable-line @typescript-eslint/no-explicit-any
+}
+
 export interface CreateModuleParams {
   appName: string;
   appVersion: number;
@@ -161,6 +176,15 @@ export function getAppSection(params: GetAppSectionParams): MakeRequestConfig {
   const requestConfig: MakeRequestConfig = {
     method: 'get',
     path: `/sdk/apps/${params.appName}/${params.appVersion.toString()}/${params.section}`,
+  };
+  return requestConfig;
+}
+
+export function updateAppSection(params: UpdateAppSectionParams, content: UpdateAppSectionContent): MakeRequestConfig {
+  const requestConfig: MakeRequestConfig = {
+    method: 'put',
+    path: `/sdk/apps/${params.appName}/${params.appVersion.toString()}/${params.section}`,
+    body: content,
   };
   return requestConfig;
 }

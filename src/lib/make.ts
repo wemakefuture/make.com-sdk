@@ -301,6 +301,12 @@ export class Make {
       .then(this.getData);
   }
 
+  async updateAppSection(params: apps.UpdateAppSectionParams, content: apps.UpdateAppSectionContent): Promise<apps.UpdateAppSectionOutput> {
+    return axios(this.generateAxiosRequest(apps.updateAppSection(params, content)))
+      .catch(this.handleErrors)
+      .then(this.getData);
+  }
+
   // Modules
   async createModule(params: apps.CreateModuleParams, content: apps.CreateModuleContent): Promise<apps.CreateModuleOutput> {
     return axios(this.generateAxiosRequest(apps.createModule(params, content)))

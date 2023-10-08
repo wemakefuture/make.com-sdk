@@ -1,6 +1,6 @@
 {
   "name": "@wemakefuture/asm-make-sdk",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -43,7 +43,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/wemakefuture/asm-make-sdk"
+    "url": "https://github.com/wemakefuture/asm-make-sdk.git"
   },
   "author": "Dominik Arnold",
   "dependencies": {
