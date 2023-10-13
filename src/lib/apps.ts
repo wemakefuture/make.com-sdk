@@ -81,15 +81,26 @@ export interface Module {
   webhooks: null | string;
 }
 
+export interface ConnectionCustomParameter {
+  name: string;
+  type: string;
+  label: string;
+  required: boolean;
+}
+
+export interface SetCustomParametersParams {
+  connectionName: string;
+}
+
+export type SetCustomParametersContent = ConnectionCustomParameter[];
+
 export interface CreateAppConnectionParams {
   appName: string;
 }
 
 export interface CreateAppConnectionContent {
-  name: string;
-  type: string;
   label: string;
-  required: boolean;
+  type: string;
 }
 
 export interface CreateAppConnectionOutput {
@@ -202,6 +213,15 @@ export function createAppConnection(params: CreateAppConnectionParams, content: 
   const requestConfig: MakeRequestConfig = {
     method: 'post',
     path: `/sdk/apps/${params.appName}/connections`,
+    body: content,
+  };
+  return requestConfig;
+}
+
+export function setConnectionCustomParameters(params: SetCustomParametersParams, content: SetCustomParametersContent): MakeRequestConfig {
+  const requestConfig: MakeRequestConfig = {
+    method: 'put',
+    path: `/sdk/apps/connections/${params.connectionName}/parameters`,
     body: content,
   };
   return requestConfig;

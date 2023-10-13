@@ -78,10 +78,8 @@ test('createAppConnection', async () => {
   const createAppConnection = await make.createAppConnection(
     { appName: 'jest-app-elgiuj' },
     {
-      name: 'jest-connection',
       label: 'Test Connection',
       type: 'basic',
-      required: true,
     },
   );
   console.log(createAppConnection);

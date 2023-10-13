@@ -324,6 +324,15 @@ export class Make {
       .then(this.getData);
   }
 
+  setConnectionCustomParameters(
+    params: apps.SetCustomParametersParams,
+    content: apps.SetCustomParametersContent,
+  ): Promise<Record<string, never>> {
+    return axios(this.generateAxiosRequest(apps.setConnectionCustomParameters(params, content)))
+      .catch(this.handleErrors)
+      .then(this.getData);
+  }
+
   // ---------------------------- Helper functions --------------------------------------------
 
   generateAxiosRequest = (makeRequestConfig: MakeRequestConfig): AxiosRequestConfig => {
