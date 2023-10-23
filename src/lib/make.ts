@@ -314,6 +314,15 @@ export class Make {
       .then(this.getData);
   }
 
+  async setModuleParameters(
+    params: apps.SetModuleParametersParams,
+    content: apps.SetModuleParametersContent,
+  ): Promise<Record<string, never>> {
+    return axios(this.generateAxiosRequest(apps.setModuleParameters(params, content)))
+      .catch(this.handleErrors)
+      .then(this.getData);
+  }
+
   // AppConnections
   async createAppConnection(
     params: apps.CreateAppConnectionParams,
@@ -324,11 +333,17 @@ export class Make {
       .then(this.getData);
   }
 
-  setConnectionCustomParameters(
+  async setConnectionCustomParameters(
     params: apps.SetCustomParametersParams,
     content: apps.SetCustomParametersContent,
   ): Promise<Record<string, never>> {
     return axios(this.generateAxiosRequest(apps.setConnectionCustomParameters(params, content)))
+      .catch(this.handleErrors)
+      .then(this.getData);
+  }
+
+  async setConnectionApi(params: apps.SetConnectionApiParams, content: apps.SetConnectionApiContent): Promise<Record<string, never>> {
+    return axios(this.generateAxiosRequest(apps.setConnectionApi(params, content)))
       .catch(this.handleErrors)
       .then(this.getData);
   }

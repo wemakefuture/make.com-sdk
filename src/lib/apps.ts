@@ -81,6 +81,21 @@ export interface Module {
   webhooks: null | string;
 }
 
+export interface SetModuleParametersParams {
+  appName: string;
+  appVersion: number;
+  moduleName: string;
+}
+
+export interface SetModuleParametersContent {
+  url: string;
+  method: string;
+  headers: object;
+  response: object;
+  body?: object;
+  qs?: object;
+}
+
 export interface ConnectionCustomParameter {
   name: string;
   type: string;
@@ -111,6 +126,18 @@ export interface AppConnection {
   name: string;
   label: string;
   type: string;
+}
+
+export interface SetConnectionApiParams {
+  connectionName: string;
+}
+
+export interface SetConnectionApiContent {
+  url: string;
+  method: string;
+  headers: object;
+  response: object;
+  body?: object;
 }
 
 export interface AppInviteParams {
@@ -209,6 +236,15 @@ export function createModule(params: CreateModuleParams, content: CreateModuleCo
   return requestConfig;
 }
 
+export function setModuleParameters(params: SetModuleParametersParams, content: SetModuleParametersContent): MakeRequestConfig {
+  const requestConfig: MakeRequestConfig = {
+    method: 'put',
+    path: `/sdk/apps/${params.appName}/${params.appVersion.toString()}/module/${params.moduleName}/api`,
+    body: content,
+  };
+  return requestConfig;
+}
+
 export function createAppConnection(params: CreateAppConnectionParams, content: CreateAppConnectionContent): MakeRequestConfig {
   const requestConfig: MakeRequestConfig = {
     method: 'post',
@@ -222,6 +258,15 @@ export function setConnectionCustomParameters(params: SetCustomParametersParams,
   const requestConfig: MakeRequestConfig = {
     method: 'put',
     path: `/sdk/apps/connections/${params.connectionName}/parameters`,
+    body: content,
+  };
+  return requestConfig;
+}
+
+export function setConnectionApi(params: SetConnectionApiParams, content: SetConnectionApiContent): MakeRequestConfig {
+  const requestConfig: MakeRequestConfig = {
+    method: 'put',
+    path: `/sdk/apps/connections/${params.connectionName}/api`,
     body: content,
   };
   return requestConfig;
