@@ -239,7 +239,7 @@ export function createModule(params: CreateModuleParams, content: CreateModuleCo
 export function setModuleParameters(params: SetModuleParametersParams, content: SetModuleParametersContent): MakeRequestConfig {
   const requestConfig: MakeRequestConfig = {
     method: 'put',
-    path: `/sdk/apps/${params.appName}/${params.appVersion.toString()}/module/${params.moduleName}/api`,
+    path: `/sdk/apps/${params.appName}/${params.appVersion.toString()}/modules/${params.moduleName}/api`,
     body: content,
   };
   return requestConfig;
