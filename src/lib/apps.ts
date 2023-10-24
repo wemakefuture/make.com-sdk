@@ -96,6 +96,22 @@ export interface SetModuleParametersContent {
   qs?: object;
 }
 
+export type ModuleMapable = {
+  name: string;
+  label: string;
+  type: string;
+  help: string;
+  required: boolean;
+};
+
+export interface SetModuleMapablesParams {
+  appName: string;
+  appVersion: number;
+  moduleName: string;
+}
+
+export type SetModuleMapablesContent = ModuleMapable[];
+
 export interface ConnectionCustomParameter {
   name: string;
   type: string;
@@ -240,6 +256,15 @@ export function setModuleParameters(params: SetModuleParametersParams, content: 
   const requestConfig: MakeRequestConfig = {
     method: 'put',
     path: `/sdk/apps/${params.appName}/${params.appVersion.toString()}/modules/${params.moduleName}/api`,
+    body: content,
+  };
+  return requestConfig;
+}
+
+export function setModuleMapables(params: SetModuleMapablesParams, content: SetModuleMapablesContent): MakeRequestConfig {
+  const requestConfig: MakeRequestConfig = {
+    method: 'put',
+    path: `/sdk/apps/${params.appName}/${params.appVersion.toString()}/modules/${params.moduleName}/expect`,
     body: content,
   };
   return requestConfig;

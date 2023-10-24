@@ -323,6 +323,12 @@ export class Make {
       .then(this.getData);
   }
 
+  async setModuleMapables(params: apps.SetModuleMapablesParams, content: apps.SetModuleMapablesContent): Promise<Record<string, never>> {
+    return axios(this.generateAxiosRequest(apps.setModuleMapables(params, content)))
+      .catch(this.handleErrors)
+      .then(this.getData);
+  }
+
   // AppConnections
   async createAppConnection(
     params: apps.CreateAppConnectionParams,
