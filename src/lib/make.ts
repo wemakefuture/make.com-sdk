@@ -24,6 +24,7 @@ export interface BaseMakeRequestParams {
 export interface MakeRequestConfig {
   method: 'get' | 'GET' | 'delete' | 'DELETE' | 'post' | 'POST' | 'put' | 'PUT' | 'patch' | 'PATCH';
   path: string;
+  contentType?: string;
   queryStringObject?: Record<string, unknown>;
   body?: unknown;
   subContentKeys?: string[];
@@ -354,6 +355,12 @@ export class Make {
       .then(this.getData);
   }
 
+  async setIcon(params: apps.SetIconParams, content: Buffer): Promise<apps.SetIconOutput> {
+    return axios(this.generateAxiosRequest(apps.setIcon(params, content)))
+      .catch(this.handleErrors)
+      .then(this.getData);
+  }
+
   // ---------------------------- Helper functions --------------------------------------------
 
   generateAxiosRequest = (makeRequestConfig: MakeRequestConfig): AxiosRequestConfig => {
@@ -362,7 +369,7 @@ export class Make {
       url: 'https://' + this.config.host + '/api/v2' + makeRequestConfig.path + '?' + queryString,
       method: makeRequestConfig.method,
       headers: {
-        'content-type': 'application/json',
+        'content-type': makeRequestConfig.contentType ? makeRequestConfig.contentType : 'application/json',
         Authorization: 'Token ' + this.config.apiKey,
       },
       data: makeRequestConfig.body ? makeRequestConfig.body : {},

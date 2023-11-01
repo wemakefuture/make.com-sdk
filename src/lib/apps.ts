@@ -156,6 +156,15 @@ export interface SetConnectionApiContent {
   body?: object;
 }
 
+export interface SetIconParams {
+  appName: string;
+  appVersion: number;
+}
+
+export interface SetIconOutput {
+  changed: boolean;
+}
+
 export interface AppInviteParams {
   appId: string;
   all?: boolean;
@@ -292,6 +301,16 @@ export function setConnectionApi(params: SetConnectionApiParams, content: SetCon
   const requestConfig: MakeRequestConfig = {
     method: 'put',
     path: `/sdk/apps/connections/${params.connectionName}/api`,
+    body: content,
+  };
+  return requestConfig;
+}
+
+export function setIcon(params: SetIconParams, content: Buffer): MakeRequestConfig {
+  const requestConfig: MakeRequestConfig = {
+    method: 'put',
+    path: `/sdk/apps/${params.appName}/${params.appVersion.toString()}/icon`,
+    contentType: 'image/png',
     body: content,
   };
   return requestConfig;

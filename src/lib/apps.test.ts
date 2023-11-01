@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import Make from '../lib/make';
 import credentials from '../credentials';
+import axios from 'axios';
 
 const make = new Make({
   apiKey: credentials.make,
@@ -84,4 +85,19 @@ test('createAppConnection', async () => {
   );
   console.log(createAppConnection);
   expect(createAppConnection['appConnection']).toBeDefined();
+});
+
+test('set icon of the app', async () => {
+  await process.nextTick(() => {});
+  // get buffer from url
+  const response = await axios.get(
+    'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.icon-icons.com%2Ficons2%2F846%2FPNG%2F512%2FDuckDuckGo_icon-icons.com_67184.png&f=1&nofb=1&ipt=022619126e3a5acc080e7af005c2ed77889dd6480e6b92d0967a98f700656a1b&ipo=images',
+    {
+      responseType: 'arraybuffer',
+    },
+  );
+  const imageBuffer = Buffer.from(response.data, 'base64');
+  const setIcon = await make.setIcon({ appName: 'test-app-rb8wq1', appVersion: 1 }, imageBuffer);
+  console.log(setIcon);
+  expect(setIcon['changed']).toBeDefined();
 });
